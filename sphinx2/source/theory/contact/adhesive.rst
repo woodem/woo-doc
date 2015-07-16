@@ -40,6 +40,8 @@ which acts against (negative sign) the elastic repulsion of particles :ref:`(eq)
 
 .. todo:: For completeness mention JKR model; mention Maugis model as the one which accounts for the transition between both, COS introducing the :math:`\alpha` parameter, Schwarz (below) giving analytical solution.
 
+.. _schwarz-contact-model:
+
 Schwarz model
 --------------
 

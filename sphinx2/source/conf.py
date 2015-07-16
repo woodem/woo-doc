@@ -42,10 +42,10 @@ try:
 except ImportError:
 	raise ImportError("BibTeX support for sphinx not found; install it using 'pip install sphinxcontrib-bibtex'")
 
-#try:
-#	import sphinxcontrib.newsfeed
-#except ImportError:
-#	raise ImportError("Disqus support for sphinx not found; install it using 'pip install sphinxcontrib-newsfeed'")
+try:
+	import sphinxcontrib.embedly
+except ImportError:
+	raise ImportError("Disqus support for sphinx not found; install it using 'pip install sphinxcontrib-embedly'")
 
 try:
 	import sphinxcontrib.exceltable
@@ -56,7 +56,7 @@ except ImportError:
 mathjax=('PNGMATH' not in os.environ)
 if not mathjax: print 100*'#'+'  USING PNGMATH  '+100*'#'
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.mathjax' if mathjax else 'sphinx.ext.pngmath', 'sphinx.ext.viewcode', 'matplotlib.sphinxext.plot_directive', 'sphinx.ext.inheritance_diagram', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.extlinks', 'sphinxcontrib.bibtex' #,'sphinxcontrib.newsfeed'
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.mathjax' if mathjax else 'sphinx.ext.pngmath', 'sphinx.ext.viewcode', 'matplotlib.sphinxext.plot_directive', 'sphinx.ext.inheritance_diagram', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.extlinks', 'sphinxcontrib.bibtex','sphinxcontrib.embedly'
 	,'sphinxcontrib.exceltable',
 	# local copies
 	'sphinxcontrib_youtube',
@@ -76,6 +76,7 @@ if False and __builtin__.woo_sphinx_fmt=='html':
 		raise ImportError("Finanything support for sphinx not found; install it using 'pip install sphinxcontrib-findanything'")
 
 
+embedly_key='0c3ba5e3227d4aa5aa961667d8ea5c25'
 
 #breathe_default_project='woo'
 #breathe_projects={'woo':'../../doxygen/xml'}
@@ -108,6 +109,8 @@ intersphinx_mapping={
 # make graphviz determine the best size instead of hard-coded one
 # http://stackoverflow.com/a/2151808/761090
 inheritance_graph_attrs = dict(size='""')
+
+numfig=True
 
 todo_include_todos=True
 

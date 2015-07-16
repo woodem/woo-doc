@@ -7,3 +7,4 @@ Case studies
    
    cyl-triax/index.rst
    x-aniso/index.rst
+   kiln/index.rst
