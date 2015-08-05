@@ -6,6 +6,8 @@ Linear (Cundall) contact model
 
 Linear contact model is widely used throughout the DEM field and was first published in :cite:`Cundall1979`. Normal force is linear function of normal displacement (=overlap); shear force increases linearly with relative shear displacement, but is limited by Coulomb linear friciton. This model is implemented in :obj:`woo.dem.Law2_L6Geom_FrictPhys_IdealElPl`.
 
+.. _linear-contact-model-stiffness:
+
 Stiffness
 ----------
 
@@ -16,7 +18,12 @@ Stiffness
    
    Series of 2 springs representing normal stiffness of contact between 2 spheres.
 
-Normal stiffness is related to :obj:`Young modulus <woo.dem.ElastMat.young>` of both particles' materials. For clarity, we define :obj:`contact area <woo.dem.L6Geom.contA>` of a fictious "connector" between spheres of total length :math:`l=l_1+l_2`. These :obj:`effective lengths <woo.dem.L6Geom.lens>` are roughly equal to radii for spheres (but have other values for e.g. :obj:`walls <woo.dem.Wall>` or :obj:`facets <woo.dem.Facet>`). The contact area is :math:`A=\pi\min(r_1,r_2)^2` (where :math:`r_i` is (equivalent -- for non-spheres) radius the respective particle). The connector is therefore an imaginary cylinder with radius of the lesser sphere, spanning between their centers. Its :obj:`stiffness <woo.dem.FrictPhys.kn>` is then
+Normal stiffness is related to :obj:`Young modulus <woo.dem.ElastMat.young>` of both particles' materials. For clarity, we define :obj:`contact area <woo.dem.L6Geom.contA>` of a fictious "connector" between spheres of total length :math:`l=l_1+l_2`. These :obj:`effective lengths <woo.dem.L6Geom.lens>` are equal to radii for spheres (but have other values for e.g. :obj:`walls <woo.dem.Wall>` or :obj:`facets <woo.dem.Facet>` -- see below), minus the initial overlap. The contact area is
+
+.. math:: A=\pi\min(l_1,l_2)^2
+   :label: linear-A
+
+where :math:`l_i` is (equivalent -- for non-spheres) radius the respective particle. The connector is therefore an imaginary cylinder with radius of the lesser sphere, spanning between their centers. Its :obj:`stiffness <woo.dem.FrictPhys.kn>` is then
 
 .. math:: k_n=\left(\frac{l_1}{E_1 A}+\frac{l_2}{E_2 A}\right)^{-1}.
    :label: linear-kn
@@ -35,7 +42,107 @@ where the ratio is averaged between both materials in contact.
 
 (unless :obj:`specified otherwise <woo.dem.Cp2_FrictMat_FrictPhys.tanPhi>`) of which consequence is that material without friction will not have frictional contacts, regardless of friction of the other material.
 
-.. note:: It is a gross simplification to derive friction parameters from material properties -- the interface of each couple of materials might have different parameters, though this simplification is mostly sufficient in the practice. If you need to define different parameters for every combination of material instances, there is the :obj:`woo.core.MatchMaker` infrastructure.
+.. note:: It is a simplification to derive friction parameters from material properties -- the interface of each couple of materials might have different parameters, though this simplification is mostly sufficient in the practice. If you need to define different parameters for every combination of material instances, there is the :obj:`woo.core.MatchMaker` infrastructure.
+
+Non-spherical particles
+"""""""""""""""""""""""
+The formulas for spheres above suppose that there is particle radius (:obj:`~woo.dem.Sphere.radius`) which defines mechanically active length (between contact point and centroid) where the material deforms (:math:`l_1`, :math:`l_2`). This is generalized for contact of non-spherical particles, but there are often choices which have to balance computing performance, (somewhat subjective) intuition and (perceived) physical correctness.
+
+
+.. this is actually never used:
+   :math:`l_i` are used to compute both contact stiffness :eq:`linear-kn` and also contact area :eq:`linear-A`. In some cases, the double-role is not desirable. This is handled by the convention that *negative* :math:`l_i` values will be used (in absolute value) for stiffness but ignored for contact area.
+
+The rules for determining :math:`l_i` are the following:
+
+1. Round particles contacting between themselves (including :obj:`~woo.dem.Facet` with non-zero :obj:`~woo.dem.Facet.halfThick` use their natural radii: :obj:`Sphere.radius <woo.dem.Sphere.radius>`, :obj:`Facet.halfThick <woo.dem.Facet.halfThick>`, :obj:`Capsule.radius <woo.dem.Capsule.radius>`, :obj:`InfCylidner.radius <woo.dem.InfCylinder.radius>`, computed centroid -- contact point distance for :obj:`~woo.dem.Ellipsoid`).
+
+2. Flat particles (:obj:`~woo.dem.Wall` or :obj:`~woo.dem.Facet` with zero :obj:`~woo.dem.Facet.halfThick`) use the other's particle radius -- this results in the same influence on contact parameters from both particles, which accounts for local (not simulated) deformation of those flat particles.
+
+  As a special case, :obj:`~woo.dem.Facet` + :obj:`~woo.dem.Sphere` set :math:`l_1` equal to max(:obj:`~woo.dem.Facet.halfThick`, :obj:`~woo.dem.Sphere.radius`) and :math:`l_2` to :obj:`~woo.dem.Sphere.radius`. The ``max`` is to account for facets with both zero and non-zero :obj:`~woo.dem.Facet.halfThick`.
+
+3. Contact of 2 flat particles is undefined.
+
+These rules are implemented in :obj:`Cp2_ functors <woo.dem.CPhysFunctor>` for respective shape combinations, and are passed as parameters to ``Cg2_Any_Any_L6Geom__Base::handleSpheresLikeContact`` and to ``Cp2_FrictMat_FrictPhys::updateFrictPhys`` in turn. Refer to their source code for details.
+
+Examples
+^^^^^^^^
+
+1. :obj:`~woo.dem.Capsule` in contact with :obj:`~woo.dem.Sphere`, with
+
+   .. math::
+      :nowrap:
+
+      \begin{align*}
+         r_1&=.2\,\mathrm{m}, & r_2&=.1\,\mathrm{m}, \\
+         u_N&=.001\,\mathrm{m}, \\
+         E_1&=10\,\mathrm{MPa}, & E_2&=30\,\mathrm{MPa}, \\
+         l_1&=r_1-\frac{u_N}{2}, & l_2&=\frac{u_N}{2}, \\
+         A&=\pi\min(l_1,l_2)^2, \\
+      \end{align*}
+
+   lead to equivalent modulus and stiffness:
+
+   .. math::
+      :nowrap:
+
+      \begin{align*}
+         \frac{l}{E'}&=\frac{l_1+l_2}{E'}=\frac{l_1}{E_1}+\frac{l_2}{E_2}, \\
+         k_n=\frac{E'A}{l}&=A\left(\frac{l_1}{E_1}+\frac{l_2}{E_2}\right)^{-1}
+      \end{align*}
+
+
+   .. ipython::
+      
+      @suppress
+      Woo [1]: from woo.core import *; from woo.dem import *; from math import pi
+
+      Woo [1]: r1,r2=.2,.1; uN=-.001; E1,E2=10e6,30e6
+
+      Woo [1]: S1=Scene(fields=[DemField(par=[Capsule.make((0,0,0),radius=r1,shaft=.1,mat=FrictMat(young=E1)),Sphere.make((0,0,r1+r2+uN),radius=r2,mat=FrictMat(young=E2))])],engines=DemField.minimalEngines())
+
+      Woo [1]: S1.one(); c=S1.dem.con[0] # one step to create contact
+
+      Woo [1]: c.geom.lens, c.geom.contA, c.phys.kn
+
+      # recompute by hand to check:
+      Woo [1]: l1,l2=r1+uN/2.,r2+uN/2.; A=pi*min(l1,l2)**2
+      
+      # l1,l2 swapped above since the functor Cg2_Sphere_Capsule_L6Geom reorders the contact
+      Woo [1]: (l2,l1), A, A*(l1/E1+l2/E2)**-1
+
+
+
+2. thin :obj:`~woo.dem.Facet` (with :math:`h=0` as :obj:`~woo.dem.Facet.halfThick`) in contact with :obj:`~woo.dem.Sphere`, with
+
+   .. math::
+      :nowrap:
+
+      \begin{align*}
+         h&=0\,\mathrm{m}, & r&=.1\,\mathrm{m}, \\
+         u_N&=.001\,\mathrm{m}, \\
+         E_1&=10\,\mathrm{MPa}, & E_2&=30\,\mathrm{MPa}, \\
+         l_1&=\max(h,r)-\frac{u_N}{2}, & l_2&=r-\frac{u_N}{2}, \\
+         A&=\pi\min(l_1,l_2)^2
+      \end{align*}
+
+
+   .. ipython::
+
+      Woo [1]: h,r=0,.1; uN=-.001; E1,E2=10e6,30e6;
+
+      Woo [1]: S2=Scene(fields=[DemField(par=[Facet.make([(0,0,0),(1,0,0),(0,1,0)],halfThick=h,mat=FrictMat(young=E1)),Sphere.make((.2,.2,h+r+uN),radius=r,mat=FrictMat(young=E2))])],engines=DemField.minimalEngines())
+
+      Woo [1]: S2.one(); c=S2.dem.con[0] # one step to create contact
+
+      Woo [1]: c.geom.lens, c.geom.contA, c.phys.kn
+
+      # hand-computation
+      Woo [1]: l1,l2=max(h,r)+uN/2.,r+uN/2.; A=pi*min(l1,l2)**2
+
+      Woo [1]: (l1,l2), A, A*(l1/E1+l2/E2)**-1
+      
+   .. warning:: The above does not match?! Should be tracked down.
+
 
 Contact respose
 ----------------

@@ -98,10 +98,6 @@ In summary, the conveyor code looks like this, in a compact way:
 
    Conveyor bed mesh created parametrically by the script above.
 
-.. warning:: Do **not** call :obj:`woo.dem.DemField.collectNodes` once a mesh is added to :obj:`S.dem.par <woo.dem.DemField.particles>`. All nodes would be made subject to motion integration, which is not something you want for static meshes!
-
-.. todo:: Think about ways how to make :obj:`woo.dem.DemField.collectNodes` smarter.
-
 
 Note on particle masks
 =======================

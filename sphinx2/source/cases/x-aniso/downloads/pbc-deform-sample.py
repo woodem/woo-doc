@@ -25,7 +25,6 @@ sp=woo.pack.SpherePack()
 sp.load('pbc-spheres_N=2556,r=0.03,rRelFuzz=0.txt')
 sp.scale(S.lab.table.packScale)
 sp.toSimulation(S,mat=mat)
-S.dem.collectNodes()
 
 axis=S.lab.axis={'xx':0,'yy':1,'zz':2,'yz':3,'zy':3,'zx':4,'xz':4,'xy':5,'yx':5}[S.lab.table.axis]
 isShear=axis>=3

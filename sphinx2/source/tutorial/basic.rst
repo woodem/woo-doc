@@ -84,15 +84,16 @@ or in one line:
 
    Woo [1]: S.dem.par[1]
 
-Besides creating the particles, it must also be said which nodes we actually want to have moving, i.e. subject to motion integration. In most basic cases, we will want all nodes to move, and there is a convenience function to collect all particles' nodes and put them into :obj:`S.dem.nodes <woo.core.Field.nodes>`:
+Besides creating the particles, it must also be said which nodes we actually want to have moving, i.e. subject to motion integration. :obj:`~woo.dem.ParticleContainer.add` tries to be smart by default, and only adds particles which have non-zero mass (:obj:`Wall` does not, as created by default) or velocity or something else (see :obj:`~woo.dem.ParticleContainer.add` and :obj:`~woo.dem.DemData.guessMoving` if you want to know more).
+
+Let's check what was done:
 
 .. ipython::
 
-   Woo [1]: S.dem.collectNodes()
+   Woo [1]: len(S.dem.par),len(S.dem.nodes)
 
-   Woo [1]: S.dem.nodes
+   Woo [1]: list(S.dem.nodes)
 
-If we fail to do this, the integrator will collect them automatically, but will issue a warning.
 
 Engines
 ========

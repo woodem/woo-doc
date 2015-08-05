@@ -48,11 +48,12 @@ Building clumps
 Individual
 ----------
 
-Using :obj:`S.dem.addClumped <woo.dem.ParticleContainer.addClumped>` instead of :obj:`S.dem.add <woo.dem.ParticleContainer.add>`, list of particles is clumped together before being added to the simulation. Dynamic clump properties are :ref:`computed analytically <clumps-analytic>` in this case. This can be useful for importing mesh which is not static, but should behave as a rigid objects, as seen e.g. in the :ref:`bottle example <tutorial-interpolated>` with the bottle:
+Using :obj:`S.dem.addClumped <woo.dem.ParticleContainer.addClumped>` instead of :obj:`S.dem.add <woo.dem.ParticleContainer.add>`, list of particles is clumped together before being added to the simulation. Dynamic clump properties are :ref:`computed analytically <clumps-analytic>` in this case. This can be useful for importing mesh which is not static, but should behave as a rigid objects, as seen e.g. in the :ref:`bottle example <tutorial-interpolated>` with the bottle (:download:`download pill-bottle.coarse2.stl <../tutorial/pill-bottle.coarse2.stl>`):
 
 .. youtube:: jXL8qXi780M
 
 .. literalinclude:: ../tutorial/bottle.py
+
 
 Inlet
 ------

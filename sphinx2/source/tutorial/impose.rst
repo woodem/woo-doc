@@ -69,7 +69,7 @@ This example shows the :obj:`woo.dem.AlignedHarmonicOscillations` imposition, wh
 Interpolated
 --------------
 
-:obj:`woo.dem.InterpolatedMotion` was used in this example to move the bottle (using :guilabel:`Video`, internally :obj:`woo.qt.SnapshotEngine`); since we needed to move the whole bottle as an aggregate, it was added as a :ref:`clump <user-clumps>`.
+:obj:`woo.dem.InterpolatedMotion` was used in this example to move the bottle (using :guilabel:`Video`, internally :obj:`woo.qt.SnapshotEngine`); since we needed to move the whole bottle as an aggregate, it was added as a :ref:`clump <user-clumps>` (:download:`download pill-bottle.coarse2.stl <pill-bottle.coarse2.stl>`):
 
 .. youtube:: D_pc3RU5IXc
 

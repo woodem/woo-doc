@@ -46,7 +46,7 @@ Let us summarize important parameters for everyday use:
 Batch example
 ==============
 
-Let us use the :obj:`woo.pre.horse.FallingHorse` preprocessor as the basis for our example; suppose we want to study the influence of the :obj:`dtSafety <woo.pre.horse.FallingHorse.dtSafety>` parameter, which will vary between 0.1 to 0.9. This example is shown in `examples/horse-batch <http://bazaar.launchpad.net/~eudoxos/woo/trunk/files/head:/examples/horse-batch/>`_ in the source distribution.
+Let us use the :obj:`woo.pre.horse.FallingHorse` preprocessor as the basis for our example; suppose we want to study the influence of the :obj:`dtSafety <woo.pre.horse.FallingHorse.dtSafety>` parameter, which will vary between 0.1 to 0.9. This example is shown in :woosrc:`examples/horse-batch` in the source distribution.
 
 As exaplained above, we need one file with preprocessor and one file describing how to vary preprocessor parameters.
 
@@ -55,18 +55,19 @@ Preprocessor
 
 Preprocessor can be saved from the :ref:`user interface <preprocessor_gui>` as text, but any loadable format is acceptable. Text file is the easiest to be inspected/modified by hand. The whole file must be a valid python expression::
 
-	##woo-expression##
-	#: import woo.pre.horse,woo.dem,math
-	woo.pre.horse.FallingHorse(
-		radius=2*woo.unit['mm'],    ## same as 2e-3
-		pattern='hexa',
-		mat=woo.dem.FrictMat(
-			density=1e3,
-			young=5e4,
-			ktDivKn=.2,
-			tanPhi=math.tan(.5)
-		)
-	)
+   ##woo-expression##
+   #: import woo.pre.horse,woo.models,woo.dem
+   woo.pre.horse.FallingHorse(
+      radius=2*woo.unit['mm'],
+      pattern='hexa',
+      model=woo.models.ContactModelSelector(
+         name='linear',
+         damping=.4,
+         numMat=(1, 2),
+         matDesc=['particles', 'mesh'],
+         mats=[woo.dem.FrictMat(density=10000, id=-1, young=1e+06, tanPhi=0.5, ktDivKn=0.2)],
+      ),
+   )
 
 The ``##woo-expression##`` denotes format of the file (for auto-detection; file extension is irrelevant), special comments starting with ``#:`` are executed before the expression is evaluted. Unit multipliers can be used via the :obj:`woo.unit` dictionary, as with ``mm``. Arbitrary (including nested) expressions can be used (``math.tan(.5)``, for instance). Unspecified parameters take their default values.
 

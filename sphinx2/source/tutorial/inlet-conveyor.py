@@ -18,8 +18,7 @@ sp=woo.pack.makeBandFeedPack(
 # create new scene 
 S=woo.master.scene=woo.core.Scene(fields=[DemField(gravity=(0,0,-10))])
 # inially only the plane is present
-S.dem.par.add(Wall.make(0,axis=2,sense=1,mat=mat,glAB=((-1,-3),(10,3))))
-S.dem.collectNodes()
+S.dem.par.add(Wall.make(0,axis=2,sense=1,mat=mat,glAB=((-1,-3),(10,3))),nodes=False)
 
 S.engines=DemField.minimalEngines(damping=.2)+[
 	# this is the factory engine

@@ -167,6 +167,7 @@ common_latex_preamble=r'''
 \def\curr#1{#1^{\circ}}
 \def\nnext#1{#1^\oplus}
 \def\next#1{#1^+}
+
 '''
 pngmath_latex_preamble=common_latex_preamble
 
@@ -348,6 +349,7 @@ latex_elements = {
 \defaultfontfeatures{Mapping=tex-text}
 \setmainfont[BoldFont={CMU Serif Bold Extended Roman}]{CMU Concrete}
 \usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.11}
 
 %% very large tolerance, to not see errors we can do nothing about anyway
 \vfuzz=100pt

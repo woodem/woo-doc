@@ -1,8 +1,7 @@
 import woo, woo.pack, woo.utils; from woo.core import *; from woo.dem import *; from minieigen import *
 
 S=woo.master.scene=woo.core.Scene(fields=[DemField(gravity=(0,0,-10))])
-S.dem.par.add(Wall.make(0,axis=2,sense=1,mat=woo.utils.defaultMaterial(),glAB=((-2,-2),(2,2))))
-S.dem.collectNodes()
+S.dem.par.add(Wall.make(0,axis=2,sense=1,mat=woo.utils.defaultMaterial(),glAB=((-2,-2),(2,2))),nodes=False)
 
 S.engines=DemField.minimalEngines(damping=.2)+[
 	BoxInlet(

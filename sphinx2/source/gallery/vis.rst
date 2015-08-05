@@ -27,9 +27,27 @@ With configurable coloring, length and export to VTK if needed:
 .. youtube:: nQD8sojqNy0
 
 
-Paraview
---------
 
-While Woo itself concentrates on being a superb simulation tool, the possibility to export to Paraview allows to create beautiful renderings of the scene, which is always useful for presenting the results to the management.
+Flow analysis
+--------------
+
+:obj:`woo.dem.FlowAnalysis` is useful e.g. for visualizing average flow rates, which can make important features of the processes really stand out:
+
+.. image:: fig/flow-average-3d.png
+
+This is the average flow for the screed wall of which video is shown below:
+
+.. image:: fig/flow-screed-wall.png
+
+
+
+Paraview movies
+---------------
+
+While Woo itself concentrates on being a superb simulation tool, the possibility to export to Paraview allows to create beautiful renderings of the scene, which is useful not just for presenting the results to the management, but also as an important aid for understanding the underlying physical processes:
 
 .. youtube:: jXL8qXi780M
+
+Screed wall simulation (flow analysis image is above):
+
+.. youtube:: a1D1Ia9WwDY
