@@ -47,6 +47,9 @@ There are 4 stiffness values:
 
      \alpha_r=\frac{1}{4\pi}.
 
+
+.. note:: Stiffness values are the same for bonded and unbonded contacts. Those concepts are orthogonal: stiffness is :math:`\frac{\partial F}{\partial u}` (tangent stiffness, in this model identical to secant stiffness) while bonds determine the :math:`u` range over which the :math:`F(u)` function is linear (or elastic, physically speaking).
+
 Bonds
 ------
 
@@ -70,10 +73,10 @@ Limit force values depend on cohesion parameters; the normal cohesion (size-inde
 
 .. math:: c_n=\underbrace{l\left(\frac{l_1}{E_1}+\frac{l_2}{E_2}\right)^{-1}}_{E'}\eps_{bn}
    :label: ice-cn
-   
+  
 :math:`E'` being equivalent Young's modulus and :math:`\eps_{bn}` being "strain" (as in :math:`\eps_{bn}=\Delta l/l`) at breakage in the normal sense (material parameter :obj:`IceMat.breakN <woo.dem.IceMat.breakN>`), :math:`l=l_1+l_2` is total center distance and radii, as used  in :ref:`linear_contact_model` (or equivalent measures used to distribute stiffness, when contacting particles are not spheres).
 
-Cohesion values are only useful for senses which are both bonded and breakable, and the breakage condition is slightly different for different senses. The values are all computed from :math:`c_n` using :math:`A` for correct dimension and :math:`\beta_t`, :math:`\beta_w`, :math:`\beta_b` (stored as 3-vector in :obj:`IceMat.beta <woo.dem.IceMat.beta>`) as dimensionless scaling parameters:
+Cohesion values are only useful for senses which are both bonded and breakable, and the breakage condition is slightly different for different senses. The values are all computed from :math:`c_n` using :math:`A` for correct dimension and :math:`\beta_t`, :math:`\beta_w`, :math:`\beta_r` (stored as 3-vector in :obj:`IceMat.beta <woo.dem.IceMat.beta>`, in this order) as dimensionless scaling parameters:
 
 .. math::
    :nowrap:
