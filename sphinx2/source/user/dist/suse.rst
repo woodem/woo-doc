@@ -32,7 +32,7 @@ Now grab and compile woo itself:
 .. code-block:: bash
 
    # get Woo source
-   git clone https://github.com/eudoxos/woodem woo
+   git clone https://github.com/woodem/woo
    # compile (drink coffee); adjust jobs=... to number of cores, and at least 4GB RAM/job
    scons jobs=4 CXX='ccache g++' brief=0 features=qt4,opengl,vtk,openmp,gts CPPPATH=/usr/lib64/python2.7/site-packages/numpy/core/include/:/usr/include/eigen3:/usr/include/vtk-6.1 LIBPATH=/usr/lib64/vtk LIBDIR=/usr/local/lib64/python2.7/site-packages EXECDIR=/usr/local/bin
    # run self-tests

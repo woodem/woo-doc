@@ -3,10 +3,10 @@
    Welcome to Woo's documentation!
    ===============================
 
-   * Code available at http://github.com/eudoxos/woodem
+   * Code available at http://github.com/woodem/woo
    * Contact us at `info@woodem.eu <mailto:info@woodem.eu>`_
-   * Post to the the forum at http://answers.launchpad.net/woo
-   * Return to the `main website <http://woodem.eu>`_
+   * Post to the the forum at https://ask.woodem.org
+   * Return to the `main website <https://woodem.org>`_
 
    Contents:
 

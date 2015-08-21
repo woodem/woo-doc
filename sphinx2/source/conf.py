@@ -124,9 +124,9 @@ tikz_tikzlibraries=''
 
 # show discussion form at the bottom of every page
 disqus_shortname='woodem'
-rst_epilog='\n\n.. only:: html\n\n   .. tip::\n\n      Got questions? Ask at `ask.woodem.org <http://ask.woodem.org>`__. Report issues to `github <https://github.com/eudoxos/woodem/issues>`__.'
+rst_epilog='\n\n.. only:: html\n\n   .. tip::\n\n      Got questions? Ask at `ask.woodem.org <http://ask.woodem.org>`__. Report issues to `github <https://github.com/woodem/woo/issues>`__.'
 
-extlinks={'woosrc':('https://github.com/eudoxos/woodem/tree/master/%s','')}
+extlinks={'woosrc':('https://github.com/woodem/woo/tree/master/%s','')}
 
 ## customize mathjax
 ## hack from https://bitbucket.org/birkenfeld/sphinx/issue/969/allow-mathjax-customization-via-localjs 

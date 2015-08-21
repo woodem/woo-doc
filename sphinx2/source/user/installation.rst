@@ -20,7 +20,7 @@ Package installation
 
 Compilation from source
 -----------------------
-Source code is hosted at `GitHub <https://github.com/eudoxos/woodem>`__ and can be otained with the `Git revision control system <http://git-scm.com/>`__ by saying ``git clone https://github.com/eudoxos/woodem.git``.
+Source code is hosted at `GitHub <https://github.com/woodem/woo>`__ and can be otained with the `Git revision control system <http://git-scm.com/>`__ by saying ``git clone https://github.com/woodem/woo.git``.
 
 (We still also use the hosting and `Launchpad <http://www.launchpad.net/woo>`_ and sources synced from GitHub can be obtained with the `Bazaar  <http://bazaar.canonical.com>`_ by saying ``bzr checkout lp:woo``. Prefer to use git, however, since updates via ``-RR`` are more reliable, and git is also much faster).
 
