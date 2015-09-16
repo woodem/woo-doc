@@ -28,14 +28,14 @@ factory=CylinderInlet(stepPeriod=100,node=Node(pos=(0,0,.17),ori=Quaternion((0,1
 
 # add factory (and optional Paraview export) to engines
 S.engines=DemField.minimalEngines(damping=.3)+[
-	factory,
-	## comment out to enable export for Paraview:
-	VtkExport(out='/tmp/bottle.',ascii=True,stepPeriod=500) 
+    factory,
+    ## comment out to enable export for Paraview:
+    VtkExport(out='/tmp/bottle.',ascii=True,stepPeriod=500) 
 ]
 # save the scene
 S.saveTmp()
 
 def pillsDone(S):
-	# once the bottle is full, wait for another 0.2s
-	#then start moving the bottle by interpolating prescribed positions and orientations
-	S.lab.botNode.dem.impose=InterpolatedMotion(t0=S.time+0.2,poss=[S.lab.botNode.pos,(0,.05,.08),(0,.05,.09),(0,.04,.13)],oris=[Quaternion.Identity,((1,0,0),.666*math.pi),((1,0,0),.85*math.pi),((1,0,0),.9*math.pi)],times=[0,.3,.5,1.6])
+    # once the bottle is full, wait for another 0.2s
+    #then start moving the bottle by interpolating prescribed positions and orientations
+    S.lab.botNode.dem.impose=InterpolatedMotion(t0=S.time+0.2,poss=[S.lab.botNode.pos,(0,.05,.08),(0,.05,.09),(0,.04,.13)],oris=[Quaternion.Identity,((1,0,0),.666*math.pi),((1,0,0),.85*math.pi),((1,0,0),.9*math.pi)],times=[0,.3,.5,1.6])
