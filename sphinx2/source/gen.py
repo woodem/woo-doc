@@ -70,7 +70,7 @@ copyright = u'{copyright} (distributor)'
 master_doc = u'index'
 templates_path=['../../source/_templates'] 
 html_static_path=['../../source/_static']
-intersphinx_mapping={{'woo':('http://www.woodem.org',None)}}
+intersphinx_mapping={{'woo':('https://www.woodem.org',None)}}
 extensions=[e for e in extensions if e!='sphinx.ext.viewcode'] # don't show code in extras, stragely wooExtra.* is included, not just the one particular extra module
 html_additional_pages = {{ }} # double here because of .format(...)
 modindex_common_prefix = [ '{mName}' ]
