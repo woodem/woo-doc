@@ -1,4 +1,5 @@
 # encoding: utf-8
+from __future__ import print_function
 from woo.pre.cylTriax import plotBatchResults
 sim='sim4d'
 db='%s.batch.hdf5'%sim
@@ -25,4 +26,4 @@ for regex,out in [
     try:
         plotBatchResults(db,titleRegex=regex,out=out,stressPath=False,sorter=naturalTitleSorter)
     except RuntimeError:
-        print u'No figure generated for %s → %s'%(regex,out)
+        print(u'No figure generated for %s → %s'%(regex,out))

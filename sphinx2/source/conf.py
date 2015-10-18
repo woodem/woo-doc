@@ -11,6 +11,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+from __future__ import print_function
 import sys, os, re, __builtin__
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -54,7 +55,7 @@ except ImportError:
 
 
 mathjax=('PNGMATH' not in os.environ)
-if not mathjax: print 100*'#'+'  USING PNGMATH  '+100*'#'
+if not mathjax: print(100*'#'+'  USING PNGMATH  '+100*'#')
 
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.mathjax' if mathjax else 'sphinx.ext.pngmath', 'sphinx.ext.viewcode', 'matplotlib.sphinxext.plot_directive', 'sphinx.ext.inheritance_diagram', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.extlinks', 'sphinxcontrib.bibtex','sphinxcontrib.embedly'
     ,'sphinxcontrib.exceltable',
@@ -66,7 +67,7 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.mathjax' i
     # 'breathe'
 ]
 
-print 'FMT: ',__builtin__.woo_sphinx_fmt
+print('FMT: ',__builtin__.woo_sphinx_fmt)
 
 if False and __builtin__.woo_sphinx_fmt=='html':
     try:

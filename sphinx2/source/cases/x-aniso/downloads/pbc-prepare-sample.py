@@ -1,3 +1,4 @@
+from __future__ import print_function
 from woo.core import *
 from woo.dem import *
 from minieigen import *
@@ -20,13 +21,13 @@ def checkPoro(S):
     Vs=sum([(4/3.)*pi*p.shape.radius**3 for p in S.dem.par])
     V=S.cell.volume
     poro=(V-Vs)/V
-    print 'porosity',poro
+    print('porosity',poro)
     if poro<.5:
         sp=woo.pack.SpherePack()
         sp.fromSimulation(S)
         saveTo='pbc-spheres_N=%d,r=%g,rRelFuzz=%g.txt'%(len(S.dem.par),rSph,rRelFuzz)
         sp.save(saveTo)
-        print 'Packing saved to',saveTo,'\n\\bye'
+        print('Packing saved to',saveTo,'\n\\bye')
         import sys
         sys.exit(0)
 S.run()

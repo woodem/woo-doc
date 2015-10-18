@@ -1,3 +1,4 @@
+from __future__ import print_function
 import woo.utils, woo.pack, woo.batch
 from woo.dem import *
 from woo.core import *
@@ -57,7 +58,7 @@ mu=woo.utils.muStiffnessScaling(piHat=pi)
 #
 Ace=mu*(1/35.)*numpy.matrix([[36,6,20,8],[12,30,16,12],[8,6,-8,-6],[12,2,-12,-2]])
 EEGG=numpy.linalg.inv(Ace)*numpy.matrix([S.lab.table.C11,S.lab.table.C33,S.lab.table.C13,S.lab.table.C12]).T
-print 'microplane stiffnesses ENa, ENb, ETa, ETb',EEGG.T
+print('microplane stiffnesses ENa, ENb, ETa, ETb',EEGG.T)
 # reassign correect stiffness
 S.lab.xiso.E1,S.lab.xiso.E2,S.lab.xiso.G1,S.lab.xiso.G2=tuple(EEGG.flat)
 S.lab.loop.updatePhys=True
@@ -66,29 +67,29 @@ S.lab.loop.updatePhys=False
 S.dt=float('nan') # force recomputation of timestep
 S.dtSafety=.9
 
-print 'CC components (input  ):',S.lab.table.C11,S.lab.table.C33,S.lab.table.C13,S.lab.table.C12
+print('CC components (input  ):',S.lab.table.C11,S.lab.table.C33,S.lab.table.C13,S.lab.table.C12)
 kPackMat=woo.utils.stressStiffnessWork()[1]
 CClattice=numpy.array([kPackMat[vi] for vi in ((0,0),(2,2),(0,2),(0,1),(3,3))])
-print 'CC components (lattice):',' '.join([str(x) for x in CClattice.flat])
+print('CC components (lattice):',' '.join([str(x) for x in CClattice.flat]))
 
 if axis==0: S.save('pbc-deform-sample-xx-saved.Ir=%g.gz'%S.lab.table.Ir)
 S.saveTmp()
-print 'initial cell dimensions',S.cell.size
+print('initial cell dimensions',S.cell.size)
 
 def shearLoading(S):
     ax=S.lab.axis
     trsf=S.cell.trsf
     eps=2*trsf[S.lab.shearAxes]
-    print 'should be the same:',eps,trsf[S.lab.shearAxes]+trsf[S.lab.shearAxes[1],S.lab.shearAxes[0]]
+    print('should be the same:',eps,trsf[S.lab.shearAxes]+trsf[S.lab.shearAxes[1],S.lab.shearAxes[0]])
     if abs(eps)<S.lab.table.maxStrain: return
-    print 'SHEAR',eps,S.lab.loop.stress[S.lab.shearAxes]
+    print('SHEAR',eps,S.lab.loop.stress[S.lab.shearAxes])
     sys.exit(0)
 
 def axialDone(S):
     sig=S.lab.loop.stress.diagonal()
-    print 'STRESSES',sig[0],sig[1],sig[2]
+    print('STRESSES',sig[0],sig[1],sig[2])
     eps=S.cell.trsf.diagonal()-Vector3.Ones
-    print 'STRAINS',eps[0],eps[1],eps[2]
+    print('STRAINS',eps[0],eps[1],eps[2])
     import sys
     sys.exit(0)
 

@@ -1,4 +1,5 @@
 # encoding: utf-8
+from __future__ import print_function
 import woo.document
 # import all modules here
 from woo import utils,log,timing,pack,document,manpage,plot,post2d,runtime,WeightedAverage2d
@@ -14,21 +15,21 @@ cg2.close()
 
 if not '--only-extras' in sys.argv:
     rsts=woo.document.allWooPackages('.')
-    print '*** RST:',rsts
+    print('*** RST:',rsts)
     wooMods='wooMods.rst'
     with open(wooMods,'w') as f:
         f.write('Woo modules\n######################\n\n')
         f.write('.. toctree::\n\n')
         for o in sorted(rsts):
-            print 'USING',o
+            print('USING',o)
             if re.match('(^|.*/)wooExtra(\..*)?$',o):
-                print '[SKIPPED]'
+                print('[SKIPPED]')
                 continue
             f.write('    %s\n'%o)
     if 1:
         for fmt in 'latex','html':
             args=['','-T','-b',fmt,'-j','6','-d','../build/doctrees','../source','../build/%s'%fmt]
-            print 'Calling sphinx.build_main with: '+' '.join(args)
+            print('Calling sphinx.build_main with: '+' '.join(args))
             __builtin__.woo_sphinx_fmt=fmt # this is used in conf.py
             sphinx.build_main(args)
 
@@ -42,7 +43,7 @@ for mName in [m for m in sys.modules if m.startswith('wooExtra.') and len(m.spli
     outDir='../build-extra/'+mod.KEY
     if not os.path.exists(srcDir): os.makedirs(srcDir)
     outName=srcDir+'/index.rst'
-    print 'WRITING OUTPUT FOR %s TO %s'%(mName,outName)
+    print('WRITING OUTPUT FOR %s TO %s'%(mName,outName))
     with open(outName,'w') as f:
         f.write('.. note:: This page is not `documentation of Woo itself <http://www.woodem.org>`_, only of an extra module.\n\n')
         f.write('%s module\n################################\n\n'%mName)
@@ -57,7 +58,7 @@ for mName in [m for m in sys.modules if m.startswith('wooExtra.') and len(m.spli
     for R in ('resources','data'): # future-proof :)
         try:
             resDir=pkg_resources.resource_filename(mName,R) # if zipped, seaches in zip, possibly raising KeyError
-            print srcDir,resDir,R
+            print(srcDir,resDir,R)
             if os.path.exists(resDir) and not os.path.exists(srcDir+'/'+R): os.symlink(resDir,srcDir+'/'+R)
         except KeyError: pass 
     # HACK: change some values in the config
@@ -84,7 +85,7 @@ latex_logo='../../source/woo-logo.pdf'
     if 1:
         for fmt in 'html','latex':
             args=['','-T','-b',fmt,'-j','6','-d','../build-doctrees',srcDir,outDir+'/'+fmt]
-            print 'Calling sphinx.build_main with: '+' '.join(args)
+            print('Calling sphinx.build_main with: '+' '.join(args))
             __builtin__.woo_sphinx_fmt=fmt # this is used in conf.py
             sphinx.build_main(args)
 

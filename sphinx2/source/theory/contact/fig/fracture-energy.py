@@ -1,3 +1,4 @@
+from __future__ import print_function
 import matplotlib
 matplotlib.rc('text',usetex=True)
 matplotlib.rc('text.latex',preamble=r'\usepackage{euler}')
@@ -13,8 +14,8 @@ sig2=array([(s if eps[i]>epsFt else (ft/epsFt)*eps[i]) for i,s in enumerate(sig)
 #sig2=concatenate((sig2,[sig2[-1]]))
 eps2=concatenate((eps[0:len(sig2)-1],[eps[len(sig2)-2]]))
 epsFt02=max(eps2)
-print epsFt,epsFt02
-print shape(eps2),shape(sig2)
+print(epsFt,epsFt02)
+print(shape(eps2),shape(sig2))
 import pylab
 pylab.grid()
 pylab.plot(eps,sig,label=r'$\sigma_N(\eps_N)$')
