@@ -17,6 +17,15 @@ Changes
 
 This page keeps track of major (and some minor) API changes for the purposes of updating the code and also for warning when older API is being used, possibly with different results.
 
+API 10103
+"""""""""
+
+.. note:: This API change was commited Oct 23, 2015.
+
+* Remove ``woo.dem.Bo1_Sphere_Aabb.distFactor``, ``woo.dem.Cg2_Sphere_Sphere_L6Geom.distFactor``, ``woo.dem.Grid1_Sphere.distFactor``; accessing thsoe from Python (reading or writing) will raise ``ValueError`` immediately. These values were replaced by :obj:`DemField.distFactor <woo.dem.DemField.distFactor>`, which is read from affected functors directly. This change ensures consistency of :obj:`~woo.dem.DemField.distFactor` accross all functors and makes it easier to change everywhere.
+
+  A related change is that :obj:`woo.models.ContactModelSelector.distFactor` is *not* set automatically in engines returned from :obj:`woo.dem.DemField.minimalEngines`; this must be set by hand in :obj:`woo.dem.DemField.distFactor`. A warning will be issued when API is smaller than 10103 and :obj:`~woo.models.ContactModelSelector.distFactor` is set.
+
 
 API 10102
 """""""""
