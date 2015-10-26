@@ -1,3 +1,4 @@
+from past.builtins import execfile
 # use the setup from the other file
 execfile('factory-shooter.py')
 # replace the generator

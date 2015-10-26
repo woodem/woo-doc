@@ -1,10 +1,12 @@
 # encoding: utf-8
 from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 import woo.document
 # import all modules here
 from woo import utils,log,timing,pack,document,manpage,plot,post2d,runtime,WeightedAverage2d
 import minieigen,re,sys,sphinx,os,os.path
-import __builtin__
+import builtins
 ##
 ## generated parts of the docs here
 ##
@@ -30,7 +32,7 @@ if not '--only-extras' in sys.argv:
         for fmt in 'latex','html':
             args=['','-T','-b',fmt,'-j','6','-d','../build/doctrees','../source','../build/%s'%fmt]
             print('Calling sphinx.build_main with: '+' '.join(args))
-            __builtin__.woo_sphinx_fmt=fmt # this is used in conf.py
+            builtins.woo_sphinx_fmt=fmt # this is used in conf.py
             sphinx.build_main(args)
 
 #
@@ -86,7 +88,7 @@ latex_logo='../../source/woo-logo.pdf'
         for fmt in 'html','latex':
             args=['','-T','-b',fmt,'-j','6','-d','../build-doctrees',srcDir,outDir+'/'+fmt]
             print('Calling sphinx.build_main with: '+' '.join(args))
-            __builtin__.woo_sphinx_fmt=fmt # this is used in conf.py
+            builtins.woo_sphinx_fmt=fmt # this is used in conf.py
             sphinx.build_main(args)
 
         

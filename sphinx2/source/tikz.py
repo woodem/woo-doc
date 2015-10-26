@@ -38,6 +38,7 @@
     Author: Christoph Reller <christoph.reller@gmail.com>
     Version: 0.4.1
 """    
+from builtins import str
 
 import tempfile
 import posixpath
@@ -132,7 +133,7 @@ def render_tikz(self,tikz,libs='',stringsubst=False):
     if stringsubst:
         tikz = tikz % {'wd': curdir}
     latex += DOC_BODY % tikz
-    if isinstance(latex, unicode):
+    if isinstance(latex, str):
         latex = latex.encode('utf-8')
 
     if not hasattr(self.builder, '_tikz_tempdir'):

@@ -1,4 +1,7 @@
 from __future__ import print_function
+from builtins import str
+from builtins import map
+from builtins import range
 import sys
 from minieigen import *
 from math import *
@@ -51,7 +54,7 @@ for Ir in IIR:
         if isShear:
             if axis=='yz': print('\t\t\t',r'\intertext{while three pure shear simulations gave}')
             try:
-                sh=map(float,[l for l in ll if l.startswith('SHEAR')][0].split()[1:])
+                sh=list(map(float,[l for l in ll if l.startswith('SHEAR')][0].split()[1:]))
             except IndexError: # lines not found
                 sys.stderr.write('Expected values not found in %s, will skip this Ir.\n'%log)
                 missingLogs=True
@@ -61,8 +64,8 @@ for Ir in IIR:
             print('\t\t\t'+r'G_{%s}&=%.4g\,{\rm MPa}^{%s}'%(axis,1e-6*GG[ax],gMarker[axis]),(r', & ' if axis!='xy' else '.'))
         else:
             try:
-                sig=map(float,[l for l in ll if l.startswith('STRESSES')][0].split()[1:])
-                eps=map(float,[l for l in ll if l.startswith('STRAINS')][0].split()[1:])
+                sig=list(map(float,[l for l in ll if l.startswith('STRESSES')][0].split()[1:]))
+                eps=list(map(float,[l for l in ll if l.startswith('STRAINS')][0].split()[1:]))
             except IndexError: #lines not found
                 sys.stderr.write('Expected values not found in %s, will skip this Ir'%log)
                 missingLogs=True

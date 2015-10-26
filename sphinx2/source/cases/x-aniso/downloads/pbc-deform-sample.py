@@ -1,4 +1,5 @@
 from __future__ import print_function
+from builtins import str
 import woo.utils, woo.pack, woo.batch
 from woo.dem import *
 from woo.core import *
@@ -107,7 +108,7 @@ else:
     goal[axis]=-S.lab.table.maxStrain
     ax1,ax2=(axis+1)%3,(axis+2)%3
     stressMask=(1<<ax1 | 1<<ax2)
-    S.engines=[WeirdTriaxControl(maxStrainRate=(1.,1.,1.),goal=goal,stressMask=stressMask,globUpdate=1,relStressTol=-1e-4,maxUnbalanced=.05,doneHook='axialDone(S)',mass=.1*S.cell.volume*mat.density,label='triax',growDamping=.6),PyRunner(200,'print S.lab.triax.stress.diagonal()')]+S.engines
+    S.engines=[WeirdTriaxControl(maxStrainRate=(1.,1.,1.),goal=goal,stressMask=stressMask,globUpdate=1,relStressTol=-1e-4,maxUnbalanced=.05,doneHook='axialDone(S)',mass=.1*S.cell.volume*mat.density,label='triax',growDamping=.6),PyRunner(200,'print(S.lab.triax.stress.diagonal())')]+S.engines
     #S.cell.nextGradV=-strainRate*Vector3.Unit(axis).asDiagonal()
 
 
