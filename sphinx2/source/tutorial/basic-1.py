@@ -5,7 +5,7 @@ from woo.core import *
 S=woo.master.scene=woo.core.Scene(fields=[DemField(gravity=(0,0,-9.81))])
 # particles:
 S.dem.par.add(Wall.make(0,axis=2),nodes=False)
-S.dem.par.add(Sphere.make((0,0,2),radius=.2)])
+S.dem.par.add(Sphere.make((0,0,2),radius=.2))
 # engines:
 S.engines=S.dem.minimalEngines(damping=.2)
 # extras:
