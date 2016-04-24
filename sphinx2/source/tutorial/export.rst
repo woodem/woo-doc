@@ -24,6 +24,7 @@ Plot data are stored in the :obj:`S.plot.data <woo.core.Plot.data>` dictionary; 
 
 .. plot::
 
+   from past.builtins import execfile
    execfile('data-plot-energy.py')
    S.run(2000,True)
    S.plot.plot()
@@ -31,6 +32,8 @@ Plot data are stored in the :obj:`S.plot.data <woo.core.Plot.data>` dictionary; 
 Plot data can be exported into text file:
 
 .. ipython::
+
+   Woo [1]: from past.builtins import execfile
 
    Woo [1]: execfile('tutorial/data-plot-energy.py')
 

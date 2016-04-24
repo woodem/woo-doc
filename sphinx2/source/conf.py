@@ -48,19 +48,19 @@ except ImportError:
 try:
     import sphinxcontrib.embedly
 except ImportError:
-    raise ImportError("Disqus support for sphinx not found; install it using 'pip install sphinxcontrib-embedly'")
+    raise ImportError("Embedly support for sphinx not found; install it using 'pip install sphinxcontrib-embedly'")
 
-try:
-    import sphinxcontrib.exceltable
-except ImportError:
-    raise ImportError("Exceltable support for sphinx not found; install it using 'pip install sphinxcontrib-exceltable'")
+#try:
+#    import sphinxcontrib.exceltable
+#except ImportError:
+#    raise ImportError("Exceltable support for sphinx not found; install it using 'pip install sphinxcontrib-exceltable'")
 
 
 mathjax=('PNGMATH' not in os.environ)
 if not mathjax: print(100*'#'+'  USING PNGMATH  '+100*'#')
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.mathjax' if mathjax else 'sphinx.ext.pngmath', 'sphinx.ext.viewcode', 'matplotlib.sphinxext.plot_directive', 'sphinx.ext.inheritance_diagram', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.extlinks', 'sphinxcontrib.bibtex','sphinxcontrib.embedly'
-    ,'sphinxcontrib.exceltable',
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.mathjax' if mathjax else 'sphinx.ext.pngmath', 'sphinx.ext.viewcode', 'matplotlib.sphinxext.plot_directive', 'sphinx.ext.inheritance_diagram', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.extlinks', 'sphinxcontrib.bibtex' ,'sphinxcontrib.embedly',
+    # ,'sphinxcontrib.exceltable',
     # local copies
     'sphinxcontrib_youtube',
     'tikz',

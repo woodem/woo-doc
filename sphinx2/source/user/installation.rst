@@ -44,8 +44,9 @@ Compilation is driven using `scons <http://www.scons.org>`_ and takes a number o
 -  ``features``: Comma-separated list of features to compile with. Important values are
 
    * ``openmp``: Compile with OpenMP, to support multi-threaded computations. This feature is supported only by ``gcc`` (not ``clang``). Note that number of threads can be set :ref:`at runtime <Running_Woo>` using the ``-jN`` option.
-   * ``qt4``: Enable user interface based on Qt4.
-   * ``opengl``: Enable 3D display during simulations; requires ``qt4`` to be enabled as well.
+   * ``qt4``: Enable user interface based on Qt4;
+   * ``qt5``: Enable user interface based on Qt5;
+   * ``opengl``: Enable 3D display during simulations; requires ``qt4`` or ``qt5`` to be enabled as well.
    * ``vtk``: Enable export to file using VTK file formats, for export to `Paraview <http://www.paraview.org>`_.
    * ``gts``: Enable building the (adapted) :obj:`woo.gts` module.
 
@@ -57,7 +58,7 @@ A typical first-compile command line may look like this::
 
    scons jobs=4 CXX='ccache g++' features=qt4,opengl,vtk,openmp,gts
 
-For quick development, woo takes the ``-R`` flag, which will recompile itself (with remembered options) and run. The ``-RR`` flag will, in addition, update the source from upstream before recompiling (if managed with git/bzr).
+For quick development, woo takes the ``-R`` flag, which will recompile itself (with remembered options) and run. The ``-RR`` flag will, in addition, update the source from upstream before recompiling (if managed with git).
 
 Virtual environment
 ^^^^^^^^^^^^^^^^^^^
@@ -78,20 +79,20 @@ If you want to use SCons for building (which is quite useful for keeping your in
     pip install --egg scons
     # install all required python modules, this may take a while
     # note: headers for HDF5 must be installed (libhdf5-dev)
-    pip install cython minieigen ipython numpy matplotlib genshi xlwt xlrd h5py lockfile psutil pillow bzr colour-runner
+    pip install cython minieigen ipython numpy matplotlib genshi xlwt xlrd h5py lockfile psutil pillow colour-runner
     # if you need the GUI, also run this (and add opengl,qt4 features to scons below)
     pip install svn+https://svn.code.sf.net/p/python-xlib/code/trunk/  # xlib
     ln -s /usr/lib/python2.7/dist-packages/{sip*,PyQt4} $VIRTUAL_ENV/lib/python2.7/site-packages
     # checkout the source from Launchpad
-    bzr co lp:woo woo
+    git clone https://github.com/woodem/woo.git
     ### for wooExtra modules (if you need some)
     ## create directory for extras
     mkdir woo/wooExtra
     ## checkout extras, put them under there so that they are installed automatically
-    bzr co URL woo/wooExtra/...    
+    git clone URL woo/wooExtra/...    
     cd woo
     # compile the source
-    scons features='vtk,gts,openmp' BUNCH OF OTHER OPTIONS
+    scons features='vtk,gts,openmp' # + BUNCH OF OTHER OPTIONS
     # run self-tests to check that everything is OK
     woo --test
     # exit the virtual environment
@@ -105,12 +106,21 @@ The ``woo`` executable remembers virtual python used during the build (in `sheba
 
   which will create the virtual environment and compile and install Woo in it.
 
+Python 3.x
+-----------
+
+Woo can be compiled with Python 3.x (>=3.4 precisely). Since scons always uses Python 2 to run itself, one has to pass something like ``PYTHON=/usr/bin/python3`` so that scons will build with this non-default interpreter.
+
 Distribution-specific instructions
 ----------------------------------
 
 .. toctree::
    dist/suse.rst
 
+Distutils
+-----------
+
+Woo can also be compiled using distutils, which uses ``setup.py`` to drive the compilation and installation. This is in fact the method used to produced Debian/Ubuntu packages. It works with both python 2.x and 3.x, but has less auto-detection and configuration features than scons; more importantly, it lacks the ability of partial re-compilation after changes to the source code (which is normally done by re-running ``scons`` or passing ``-R`` to Woo).
 
 Windows
 =======

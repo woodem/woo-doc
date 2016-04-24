@@ -47,17 +47,17 @@ The bed will start at :math:`x=0` and will go up to :math:`x=x_1` (``x1``) with 
    # x points where polylines will be defined
    Woo [1]: xx=numpy.linspace(0,x1,num=xDiv)
 
-   Woo [1]: print xx
+   Woo [1]: print(xx)
 
    # for each x, create the polyline with 4 points
    Woo [1]: pts=[[(x,-.5*botWd-sideWd,sideHt),(x,-.5*botWd,0),(x,.5*botWd,0),(x,.5*botWd+sideWd,sideHt)] for x in xx]
 
-   Woo [1]: print pts
+   Woo [1]: print(pts)
 
    # convert list of polylines to a gts surface (all must have the same number of points)
    Woo [1]: surf=woo.pack.sweptPolylines2gtsSurface(pts)
 
-   Woo [1]: print surf
+   Woo [1]: print(surf)
 
    # convert surface to facets and add them to the scene
    Woo [1]: S.dem.par.add(woo.pack.gtsSurface2Facets(surf))

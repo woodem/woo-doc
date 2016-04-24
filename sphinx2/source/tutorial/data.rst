@@ -37,6 +37,7 @@ This would plot :math:`z`-position (``pos[2]``, as ``pos`` is a vector in 3d) of
 .. plot::
    :include-source:
 
+   from past.builtins import execfile
    execfile('basic-1.py')                                  # re-use the simple setup for brevity
    S.plot.plots={'S.time': ('S.dem.par[1].pos[2]',)}       # define what to plot
    S.engines=S.engines+[PyRunner(10,'S.plot.autoData()')]  # add the engine
@@ -58,6 +59,7 @@ To make the plot prettier, :math:`x`-axis and :math:`y`-axis title can be set us
 
 .. plot::
 
+   from past.builtins import execfile
    execfile('basic-1.py')
    S.plot.plots={'t=S.time': ('$z_1$=S.dem.par[1].pos[2]','$z_0$=S.dem.par[0].pos[2]',None,'$E_k$=S.dem.par[1].Ek')}
    S.engines=S.engines+[PyRunner(10,'S.plot.autoData()')]
@@ -100,6 +102,7 @@ We add another figure showing energies on the left; :obj:`energy total <woo.core
 
 .. plot::
 
+   from past.builtins import execfile
    execfile('data-plot-energy.py')
    S.run(2000,True)
    S.plot.plot()
@@ -126,6 +129,7 @@ The complex interface requires one to assign keys to data using :obj:`S.plot.add
 .. plot::
    :context:
 
+   from past.builtins import execfile
    execfile('basic-1.py')
    S.engines=S.engines+[PyRunner(5,'myAddPlotData(S)')]
    # define function which will be called by the PyRunner above
@@ -167,7 +171,7 @@ Engines, when they have :obj:`~woo.core.Engine.label` set in the constructor (as
    @suppress
    Woo [1]: from woo.core import *; from woo.dem import *; import woo
 
-   Woo [1]: S=Scene(engines=[PyRunner(10,'print "Step number %d"%S.step',label='foo')],fields=[DemField()])
+   Woo [1]: S=Scene(engines=[PyRunner(10,'print("Step number %d"%S.step)',label='foo')],fields=[DemField()])
 
    Woo [1]: S.engines 
 

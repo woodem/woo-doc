@@ -63,8 +63,8 @@ API 10102
 
     3. keeping everything (functors *and* :obj:`~woo.gl.GlSetup`) and only change individual parameters::
 
-      S.gl.renderer.scaleOn=True
-      S.gl.sphere.quality=5
+         S.gl.renderer.scaleOn=True
+         S.gl.sphere.quality=5
 
   * Construction (which used to result in assignment of static attributes) will have no effect, as the object will be immediately discarded::
 

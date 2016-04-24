@@ -14,6 +14,11 @@ cg2=open('theory/geom/generated-cg2-table.rst-fragment','w')
 cg2.write(woo.document.makeCGeomFunctorsMatrix()+'\n\n')
 cg2.close()
 
+import warnings
+warnings.filterwarnings('ignore',category=DeprecationWarning,module='.*IPython.*')
+
+
+
 
 if not '--only-extras' in sys.argv:
     rsts=woo.document.allWooPackages('.')
@@ -29,8 +34,8 @@ if not '--only-extras' in sys.argv:
                 continue
             f.write('    %s\n'%o)
     if 1:
-        for fmt in 'latex','html':
-            args=['','-T','-b',fmt,'-j','6','-d','../build/doctrees','../source','../build/%s'%fmt]
+        for fmt in 'html','latex':
+            args=['','-T','-b',fmt,'-j','1','-d','../build/doctrees','../source','../build/%s'%fmt]
             print('Calling sphinx.build_main with: '+' '.join(args))
             builtins.woo_sphinx_fmt=fmt # this is used in conf.py
             sphinx.build_main(args)
@@ -86,7 +91,7 @@ latex_logo='../../source/woo-logo.pdf'
         ))
     if 1:
         for fmt in 'html','latex':
-            args=['','-T','-b',fmt,'-j','6','-d','../build-doctrees',srcDir,outDir+'/'+fmt]
+            args=['','-T','-b',fmt,'-j','1','-d','../build-doctrees',srcDir,outDir+'/'+fmt]
             print('Calling sphinx.build_main with: '+' '.join(args))
             builtins.woo_sphinx_fmt=fmt # this is used in conf.py
             sphinx.build_main(args)
