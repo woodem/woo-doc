@@ -288,3 +288,15 @@ Presenting contacts as cylinders of which radius varies by transmitted force is 
 
 .. image:: fig/paraview-force-network.png
 
+
+Pov-RAY
+=======
+
+`Pov-RAY <http://www.povray.org>`__ is open-source raytracing code. Woo supports output to POV-Ray via :obj:`woo.dem.POVRayExport`. Particles are assigned textures based on their masks (in the future, texturing by :obj:`woo.dem.Material` instances is envisaged); camera parameters, texture definitions and others can be independently hand-tuned. Texturing procedures are informed about particle diameter, which is useful for scaling according to particle size.
+
+Refer to :woosrc:`examples/povray-export.py` for a simple example.
+
+In the following movie, focal blur, procedural textures and bump-mapping (particles are ideally spherical in the simulation) are used for semi-realistic view of the scene. Rendering >700 frames in the 2000x1500 resolution took many hours. View this movie at youtube for better resolution.
+
+.. youtube:: p1VxvvNXDQc
+

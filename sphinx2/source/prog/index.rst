@@ -7,5 +7,6 @@ Programming manual
 
    object.rst
    conventions.rst
+   performance.rst
    timestep.rst
    mass-inertia.rst
