@@ -12,11 +12,37 @@ Package installation
 
 .. admonition:: Ubuntu
 
-   Installation from pre-compiled packages is the recommended method of installation. You will receive updates automatically via your system's package manager. `Woo-daily package archive <https://code.launchpad.net/~eudoxos/+archive/woo-daily>`_ contains the packages. Open the terminal and type::
+   Installation from pre-compiled packages is the recommended method of installation. You will receive updates automatically via your system's package manager. `Woo-daily package archive <https://code.launchpad.net/~eudoxos/+archive/woo-daily>`_ contains the packages. The oldest supported version is 14.04 LTS, but you are well advised to stay with newer (e.g. last LTS) if possible.
+   
+   Open the terminal and type::
 
       sudo add-apt-repository ppa:eudoxos/woo-daily
       sudo apt-get update
-      sudo apt-get install python-woo
+      sudo apt-get install python3-woo
+
+   On older distribution, ``python3-woo`` is not available and you can install ``python-woo`` instead. It is advised to use Python 3; functionality is the same, user scripts are 99% compatible (if you avoid centrain constructs) and Python 2.7 support will be dropped at some later point. If you use python 2.7, drop the ``3`` prefix from commands listed below (``python-pip`` instead of ``python3-pip``, ``pip`` instead of ``pip3``).
+
+   If you see this or similar error when running ``woo``::
+
+      /usr/lib/python2.7/dist-packages/IPython/lib/inputhook.pyc in enable_gui(gui, app)
+          538     except KeyError:
+          539         e = "Invalid GUI request %r, valid ones are:%s" % (gui, guis.keys())
+      --> 540         raise ValueError(e)
+          541     return gui_hook(app)
+          542
+      
+      ValueError: Invalid GUI request 'qt5', valid ones are:['osx', 'qt4', 'glut', None, 'gtk3', 'pyglet', 'wx', 'none', 'qt', 'gtk', 'tk']
+
+   the packaged version of ``ipython`` does not support ``qt5`` yet. This can be fixed by installing a newer version from `Python package index (a.k.a. PyPI) <https://pypi.python.org/>`__ by running (provided you have ``pip3`` installed; if not, run ``sudo apt-get install python3-pip``)::
+
+      pip3 install 'ipython>=3.0,<4'
+
+   or::
+
+      sudo pip3 install --system 'ipython>=3.0,<4'     # installation for all users
+
+   which should pull version 3.x from PyPI and install it locally; this newer version will take precedence over the one installed from APT packages, no problem to have both installed at the same time. After this, ``woo`` should launch normally.
+
 
 Compilation from source
 -----------------------
@@ -53,12 +79,16 @@ Compilation is driven using `scons <http://www.scons.org>`_ and takes a number o
 - ``jobs``: Number of compilations to run simultaneously. Can be set to the number of cores your machine has, but make sure you have at least 3GB RAM per each job if you use ``gcc`` − Woo is quite RAM-hungry during compilation, due to extensive use of templates, especially in boost::python.
 - ``CPPPATH``: Path for preprocessor. Usually, you only need to set this if you have VTK or Eigen in non-standard locations.
 - ``CXX``: The compiler to use.
+- ``PYTHON``: Python interpreter to use; SCons itself always runs with python 2.x, but it is possible to use a different interpreter for Woo itself (such as ``python3``).
+
+.. note:: Using Python 3.x is recommended (>=3.4, which all recent distributions ship); do this as shown below by passing the ``PYTHON`` option.
 
 A typical first-compile command line may look like this::
 
-   scons jobs=4 CXX='ccache g++' features=qt4,opengl,vtk,openmp,gts
+   scons jobs=4 CXX='ccache g++' features=qt4,opengl,vtk,openmp,gts PYTHON=/usr/bin/python3
 
 For quick development, woo takes the ``-R`` flag, which will recompile itself (with remembered options) and run. The ``-RR`` flag will, in addition, update the source from upstream before recompiling (if managed with git).
+
 
 Virtual environment
 ^^^^^^^^^^^^^^^^^^^
@@ -106,10 +136,6 @@ The ``woo`` executable remembers virtual python used during the build (in `sheba
 
   which will create the virtual environment and compile and install Woo in it.
 
-Python 3.x
------------
-
-Woo can be compiled with Python 3.x (>=3.4 precisely). Since scons always uses Python 2 to run itself, one has to pass something like ``PYTHON=/usr/bin/python3`` so that scons will build with this non-default interpreter.
 
 Distribution-specific instructions
 ----------------------------------
