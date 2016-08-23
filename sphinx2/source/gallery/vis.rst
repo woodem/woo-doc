@@ -40,11 +40,22 @@ This is the average flow for the screed wall of which video is shown below:
 .. image:: fig/flow-screed-wall.png
 
 
+POV-Ray export
+---------------
+
+:obj:`woo.dem.POVRayExport` harnesses the power of the `POV-Ray <http://povray.org>`__ raytraycer to visualize simulations with advanced texture, lighting and camera options. This movies uses focal blur for realistic blur and bump-mapping for rough surface appearance. The logo itself is a 3d object placed in the scene.
+
+.. youtube:: p1VxvvNXDQc
+
+In this detail video, particles are colored by diameter:
+
+.. youtube:: 66N2ltj2sFk
+
 
 Paraview movies
 ---------------
 
-While Woo itself concentrates on being a superb simulation tool, the possibility to export to Paraview allows to create beautiful renderings of the scene, which is useful not just for presenting the results to the management, but also as an important aid for understanding the underlying physical processes:
+While Woo itself concentrates on being a superb simulation tool, the possibility to :obj:`export to Paraview <woo.dem.VtkExport>` allows to create beautiful renderings of the scene, which is useful not just for presenting the results to the management, but also as an important aid for understanding the underlying physical processes:
 
 .. youtube:: jXL8qXi780M
 
