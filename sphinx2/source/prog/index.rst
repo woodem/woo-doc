@@ -10,3 +10,4 @@ Programming manual
    performance.rst
    timestep.rst
    mass-inertia.rst
+   contact.rst
