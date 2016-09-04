@@ -163,7 +163,7 @@ In a finite step computation, we can evaluate the damage variable :math:`\omega`
 
 and substitute :eq:`eq-cpm-sigmaNv` and :eq:`eq-cpm-sigmaN` into :eq:`eq-cpm-epsd` obtaining
 
-.. math:: \curr{\eps}_d+\Delta\eps_d&=\next{\eps}_N-(1-\omega)\next{\eps}_N-\frac{k_N\eps0}{k_N}\left\langle\frac{\tau_d\Delta\eps_d}{\Delta t}\right\rangle^{M_d},
+.. math:: \curr{\eps}_d+\Delta\eps_d=\next{\eps}_N-(1-\omega)\next{\eps}_N-\frac{k_N\eps0}{k_N}\left\langle\frac{\tau_d\Delta\eps_d}{\Delta t}\right\rangle^{M_d},
 
 which can be written as
 
@@ -174,7 +174,7 @@ which can be written as
 
 During unloading, i.e. :math:`\Delta\eps_d\leq0`, the power term vanishes, leading to
 
-.. math:: \Delta\eps_d&=\omega\next{\eps}_N-\curr{\eps}_d,
+.. math:: \Delta\eps_d=\omega\next{\eps}_N-\curr{\eps}_d,
 
 applicable if :math:`\omega\next{\eps}_N\leq\curr{\eps}_d`.
 
@@ -226,7 +226,7 @@ Given a prescribed confinement value :math:`\sigma_0`, we adjust :math:`\eps_N` 
 
 .. math::
 
-   \eps_N'&=\eps_N+\begin{cases}
+   \eps_N'=\eps_N+\begin{cases}
       \sigma_0/k_N & \hbox{if $\sigma_0>k_N\eps_s$,} \\
       \eps_s+\frac{\sigma_0-k_N\eps_s}{k_N\tilde K_s} & \hbox{otherwise,} \\
    \end{cases}
@@ -257,13 +257,13 @@ The shear stress is limited by the yield function (:ref:`figure <concrete-yield-
 
    f(\sigma_N,\vec{\sigma}_T)&=|\vec{\sigma}_T|-r_{pl}=|\vec{\sigma}_T-(c_T-\sigma_N\tan\phi),
 
-   c_T=c_{T0}(1-\omega)
+   c_T&=c_{T0}(1-\omega)
 
 where material parameters :math:`c_{T0}` and :math:`\phi` are initial cohesion and internal friction angle, respectively. The initial cohesion  :math:`c_{T0}` is reduced to the current cohesion :math:`c_T` using damage state variable :math:`\omega`. Note that we split the plasticity function in a part that depends on :math:`\vec{\sigma}_T` and another part which depends on already known values of :math:`\omega` and :math:`\sigma_N`; the latter is denoted :math:`r_{pl}`, radius of the plasticity surface in given :math:`\sigma_N` plane.
 
 The plastic flow rule 
 
-.. math:: \vec{\dot\eps}_{Tp}&=\dot\lambda\frac{\vec{\sigma}_T}{|\vec{\sigma}_T|},
+.. math:: \vec{\dot\eps}_{Tp}=\dot\lambda\frac{\vec{\sigma}_T}{|\vec{\sigma}_T|},
 
 :math:`\lambda` being plastic multiplier, is associated in the plane of shear stresses but not with respect to the normal stress (:ref:`figure <concrete-yield-surface-flow-rule>`). The advantage of using a non-associated flow rule is computational. At every step, :math:`\sigma_N` can be evaluated directly, followed by a direct evaluation of :math:`\vec{\sigma}_T`; stress return in shear stress plane reduces to simple radial return and does not require any iterations as :math:`f(\sigma_N,\vec{\sigma}_T)=0` is satisfied immediately.
       
@@ -607,7 +607,7 @@ Computation of stress from reaction forces is not suitable for cases where the l
 
 where :math:`V` is the considered volume containing contacts with the :math:`c` index. For each contact, there is :math:`l=|\vec{C}_2-\vec{C}_1|`, :math:`F_{\Sigma}=F_N\vec{n}+\vec{F}_T`, with all variables assuming their current value. We use 2nd-order normal projection tensor :math:`\tens{N}=\vec{n}\otimes\vec{n}` which, evaluated component-wise, gives
 
-.. math:: \tens{N}_{ij}&=\vec{n}_i\vec{n}_j.
+.. math:: \tens{N}_{ij}=\vec{n}_i\vec{n}_j.
 
 
 The 3rd-order tangential projection tensor :math:`\tens{T}^T=\tens{I}_{\rm sym}\cdot \vec{n}-\vec{n}\otimes\vec{n}\otimes\vec{n}` is written by components
@@ -645,7 +645,7 @@ Let us recall the parameters that influence the elastic response of the model:
 
 * interaction radius :math:`R_I` is the relative distance determining the "non-locality" of contact detection. For :math:`R_I=1`, only spheres that touch are considered as being in contact. In general, the condition reads
    
-  .. math:: d_0&\leq R_I(r_1+r_2).
+  .. math:: d_0\leq R_I(r_1+r_2).
 
   The value of :math:`R_I` directly influences the average number of interactions per sphere (percolation). For our purposes, we recommend to use :math:`R_I=1.5`, which gives the average of ≈12 interactions per sphere for packing with porosity < 0.5.
                

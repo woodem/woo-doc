@@ -22,7 +22,7 @@ Integrating position consists in using current acceleration :math:`\curr{\vec{a}
 
 Using the 2-nd order finite difference approximation with step :math:`\Dt`, we obtain
 
-.. math:: \curr{\vec{a}}&\cong\frac{\prev{\vec{u}}-2\curr{\vec{u}}+\next{\vec{u}}}{\Dt^2}
+.. math:: \curr{\vec{a}}\cong\frac{\prev{\vec{u}}-2\curr{\vec{u}}+\next{\vec{u}}}{\Dt^2}
 
 from which we express
 
@@ -33,15 +33,15 @@ from which we express
 
 Typically, :math:`\prev{\vec{u}}` is already not known (only :math:`\curr{\vec{u}}` is); we notice, however, that
 
-.. math:: \pprev{\vec{v}}&\simeq\frac{\curr{\vec{u}}-\prev{\vec{u}}}{\Dt},
+.. math:: \pprev{\vec{v}}\simeq\frac{\curr{\vec{u}}-\prev{\vec{u}}}{\Dt},
 
 i.e. the mean velocity during the previous step, which is known. Plugging this approximate into the :math:`(\dagger)` term, we also notice that mean velocity during the current step can be approximated as
 
-.. math:: \nnext{\vec{v}}&\simeq\pprev{\vec{v}}+\curr{\vec{a}}\Dt,
+.. math:: \nnext{\vec{v}}\simeq\pprev{\vec{v}}+\curr{\vec{a}}\Dt,
 
 which is :math:`(\dagger)`; we arrive finally at
 
-.. math:: \next{\vec{u}}&=\curr{\vec{u}}+\Dt\left(\pprev{\vec{v}}+\curr{\vec{a}}\Dt\right).
+.. math:: \next{\vec{u}}=\curr{\vec{u}}+\Dt\left(\pprev{\vec{v}}+\curr{\vec{a}}\Dt\right).
 
 The algorithm can then be written down by first computing current mean velocity :math:`\nnext{\vec{v}}` which we need to store for the next step (just as we use its old value :math:`\pprev{\vec{v}}` now), then computing the position for the next time step :math:`\next{\vec{u}}`:
 
@@ -195,7 +195,7 @@ showing that the correction :math:`\Dt\curr{\vec{\dot v}_L}` corresponds to subt
 Going back to :eq:`eq-hvl-currv`, we write the unknown on-step velocity as :math:`\curr{\vec{v}}\approx (\pprev{\vec{v}}+\nnext{\vec{v}})/2` and substitute :math:`\Dt\curr{\vec{\dot v}_L}` into :eq:`eq-nnext-v-simple` obtaining
 
 .. math::
-   \nnext{\vec{v}}&=\left(\mat{1}-\frac{\nnext{\tens{L}}+\pprev{\tens{L}}}{4}\Dt\right)^{-1}\left[(\nnext{\tens{L}}-\pprev{\tens{L}})\curr{\vec{x}}+\left(\mat{1}+\frac{\nnext{\tens{L}}+\pprev{\tens{L}}}{4}\Dt\right)\pprev{\vec{v}}+\curr{\vec{a}}\Dt\right].
+   \nnext{\vec{v}}=\left(\mat{1}-\frac{\nnext{\tens{L}}+\pprev{\tens{L}}}{4}\Dt\right)^{-1}\left[(\nnext{\tens{L}}-\pprev{\tens{L}})\curr{\vec{x}}+\left(\mat{1}+\frac{\nnext{\tens{L}}+\pprev{\tens{L}}}{4}\Dt\right)\pprev{\vec{v}}+\curr{\vec{a}}\Dt\right].
 
 The position-independent terms are stored in :obj:`ImLL4hInv <woo.dem.Leapfrog.ImLL4hInv>`, :obj:`LmL <woo.dem.Leapfrog.LmL>`, :obj:`IpLL4h <woo.dem.Leapfrog.IpLL4h>` and are updated at each timestep. Both :math:`\pprev{\tens{L}}` and :math:`\nnext{\tens{L}}` must be know in this equations; they are stored in :obj:`woo.core.Cell.gradV` and :obj:`woo.core.Cell.nextGradV` respectively.
 
@@ -204,7 +204,7 @@ Angular velocity
 
 As :math:`\vec{\omega}_L` is only a function of time (not of space, unlike :math:`\vec{v}_L`), :eq:`eq-leapfrog-nnextangvel` simply becomes
 
-.. math:: \nnext{\vec{\omega}}&=\pprev{\vec{\omega}}+\Dt\curr{\dot{\vec{\omega}}} \underbrace{- \pprev{\vec{\omega}_L}+\nnext{\vec{\omega}_L}}_{(\dagger)}
+.. math:: \nnext{\vec{\omega}}=\pprev{\vec{\omega}}+\Dt\curr{\dot{\vec{\omega}}} \underbrace{- \pprev{\vec{\omega}_L}+\nnext{\vec{\omega}_L}}_{(\dagger)}
 
 where the :math:`(\dagger)` term is stored as :obj:`deltaSpinVec <woo.dem.Leapfrog.deltaSpinVec>`.
 

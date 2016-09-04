@@ -206,7 +206,7 @@ As the inner integrals over :math:`\phi` do not depend on :math:`\theta`, they c
 .. math::
    :label: eq-c1111-gen
 
-      C_{1111}&=\frac{3}{2}\int\limits_{\theta=0}^{\pi}{\frac{3}{4}E_N{{\mathrm s}^5\theta\,}+ E_T{{\mathrm s}^3\theta\,}-\frac{3}{4}E_T{{\mathrm s}^5\theta\,}}\,{\rm d}\theta.
+      C_{1111}=\frac{3}{2}\int\limits_{\theta=0}^{\pi}{\frac{3}{4}E_N{{\mathrm s}^5\theta\,}+ E_T{{\mathrm s}^3\theta\,}-\frac{3}{4}E_T{{\mathrm s}^5\theta\,}}\,{\rm d}\theta.
 
 Similarly for other components,
 
@@ -333,21 +333,21 @@ or in a compact form
 .. math::
    :label: eq-Celliptic-compact
 
-   \mathcal{C}&=\mat{A}\mathcal{E}
+   \mathcal{C}=\mat{A}\mathcal{E}
 
 with the dependent component
 
 .. math::
    :label: eq-C44-dep
 
-   C_{44}&=\frac{1}{35}\begin{pmatrix}8& 6& 13& 8\end{pmatrix}\mathcal{E}=\begin{pmatrix}\frac{1}{4}& \frac{1}{4}& -\frac{1}{2}& 0\end{pmatrix} \mathcal{C}.
+   C_{44}=\frac{1}{35}\begin{pmatrix}8& 6& 13& 8\end{pmatrix}\mathcal{E}=\begin{pmatrix}\frac{1}{4}& \frac{1}{4}& -\frac{1}{2}& 0\end{pmatrix} \mathcal{C}.
 
 Since the :math:`\mat{A}` matrix is invertible, we can determine :math:`\mathcal{E}` for given values of :math:`\mathcal{C}` as
 
 .. math::
    :label: eq-Eelliptic-compact
 
-   \mathcal{E}&=\mat{A}^{-1}\mathcal{C}. 
+   \mathcal{E}=\mat{A}^{-1}\mathcal{C}. 
 
 
 
@@ -373,21 +373,21 @@ Stiffness tensor of a lattice is, assuming Voigt hypothesis of uniform node disp
 .. math::
    :label: eq-tE-knkt
 
-   \tens{\mathcal{C}}&=\frac{1}{V}\sum|l|^2\left[k_n \tens{\mathcal{N}}\otimes\tens{\mathcal{N}} +k_t\tens{\mathcal{T}}^T\cdot\tens{\mathcal{T}}\right],
+   \tens{\mathcal{C}}=\frac{1}{V}\sum|l|^2\left[k_n \tens{\mathcal{N}}\otimes\tens{\mathcal{N}} +k_t\tens{\mathcal{T}}^T\cdot\tens{\mathcal{T}}\right],
 
 where :math:`|l|=(2r')` is the length of a lattice element. After limit transition, for some representative volume :math:`V` and large number of lattice elements :math:`N`, the tensor is written as an integral over all orientations
 
 .. math::
    :label: eq-tE-integral
 
-   \tens{\mathcal{C}}&=\frac{N}{4V\pi}\int_\Omega (2r')^2 \left( k_n \tens{\mathcal{N}}\otimes\tens{\mathcal{N}} +k_t\tens{\mathcal{T}}^T\cdot\tens{\mathcal{T}}\right) \d\Omega,
+   \tens{\mathcal{C}}=\frac{N}{4V\pi}\int_\Omega (2r')^2 \left( k_n \tens{\mathcal{N}}\otimes\tens{\mathcal{N}} +k_t\tens{\mathcal{T}}^T\cdot\tens{\mathcal{T}}\right) \d\Omega,
 
 where :math:`(2r')` was kept inside the integral, as it is not a constant. Plugging in stiffnesses from :eq:`eq-kn-En` yields
 
 .. math::
    :label: eq-tE-a
 
-   \tens{\mathcal{C}}&= \frac{N}{2V\pi}\hat\pi \overline{r^2r'}\int_{\Omega}E_N'\tens{\mathcal{N}}\otimes\tens{\mathcal{N}}+E_T'\tens{\mathcal{T}}^T\cdot\tens{\mathcal{T}} \d\Omega.
+   \tens{\mathcal{C}}=\frac{N}{2V\pi}\hat\pi \overline{r^2r'}\int_{\Omega}E_N'\tens{\mathcal{N}}\otimes\tens{\mathcal{N}}+E_T'\tens{\mathcal{T}}^T\cdot\tens{\mathcal{T}} \d\Omega.
 
 
 where the :math:`r^2r'` term appearing inside the integral was written in the front as an average, because it is on average orientation-independent.
@@ -400,27 +400,27 @@ Microplane moduli :math:`E_N`, :math:`E_T` and lattice moduli :math:`E_N'`, :mat
 .. math::
    :label: eq-e-e'
    
-   E_N=\mu E_N',
+   E_N&=\mu E_N',
 
-   E_T=\mu E_T'.
+   E_T&=\mu E_T'.
 
 We can plug this relation into :eq:`eq-stiff-integral` obtaining
 
 .. math::
    :label: eq-tE-b
 
-   \tens{\mathcal{C}}&=\frac{3}{2\pi}\mu\int_{\Omega} E_N'\tens{\mathcal{N}}\otimes\tens{\mathcal{N}} + E_T' \tens{\mathcal{T}}^T\cdot\tens{\mathcal{T}}\d\Omega.
+   \tens{\mathcal{C}}=\frac{3}{2\pi}\mu\int_{\Omega} E_N'\tens{\mathcal{N}}\otimes\tens{\mathcal{N}} + E_T' \tens{\mathcal{T}}^T\cdot\tens{\mathcal{T}}\d\Omega.
 
 By putting :eq:`eq-tE-a` and :eq:`eq-tE-b` equal, we solve
 
 .. math::
    :label: eq-mu
 
-   \mu&=\frac{E_N}{E_N'}=\frac{E_T}{E_T'}=\frac{1}{3}\frac{N\overline{r'r^2}\hat\pi}{V}
+   \mu=\frac{E_N}{E_N'}=\frac{E_T}{E_T'}=\frac{1}{3}\frac{N\overline{r'r^2}\hat\pi}{V}
 
 If we consider the special case of :math:`r` and :math:`r'` being constant, we can omit the average and write :math:`\mu` in the form better revealing its geometrical meaning as
 
-.. math:: \mu&=\frac{1}{6}\frac{N (\hat\pi r^2)(2r')}{V}=\frac{1}{6}\frac{N A l}{V}
+.. math:: \mu=\frac{1}{6}\frac{N (\hat\pi r^2)(2r')}{V}=\frac{1}{6}\frac{N A l}{V}
 
 with :math:`A=\hat\pi r^2` and :math:`l` being is the cross-section area and length of one lattice element; the fraction is therefore proportion between the stiff volume of lattice elements :math:`NAl` to the overall volume :math:`V`.
 
@@ -430,21 +430,21 @@ Stiffness tensor from lattice moduli
 Since stiffness tensor components :math:`C_{ij}` are linear with respect to microplane moduli :math:`E_*`, we can write :math:`C_{ij}(E_*)=C_{ij}(\mu E_*')=\mu C_{ij}(E_*')`. Thus, for instance, :eq:`eq-c1111-iso` becomes
 
 .. math::
-         C_{1111}&=\frac{1}{5}(6E_N+4E_T)=\mu\frac{1}{5}(6E_N'+4E_T')
+         C_{1111}=\frac{1}{5}(6E_N+4E_T)=\mu\frac{1}{5}(6E_N'+4E_T')
 
 and :eq:`eq-Celliptic-compact`, :eq:`eq-Eelliptic-compact` become respectively
 
 .. math::
    :label: eq-Celliptic-micro
 
-    \mathcal{C}&=\mu\mat{A}\mathcal{E}'
+    \mathcal{C}=\mu\mat{A}\mathcal{E}'
 
 and 
 
 .. math::
    :label: eq-Eelliptic-micro
 
-    \mathcal{E}'&=\frac{1}{\mu}\mat{A}^{-1}\mathcal{C}.
+    \mathcal{E}'=\frac{1}{\mu}\mat{A}^{-1}\mathcal{C}.
 
 
 
@@ -518,7 +518,7 @@ Shear test is purely deformation-controlled. The periodic cell is prescribed pur
 .. math::
    :label: eq-sim-Gij
 
-   G_{ij}&=\frac{T_{ij}}{2\hat\eps_{ij}}=\frac{T_{ij}}{\gamma_{ij}}.
+   G_{ij}=\frac{T_{ij}}{2\hat\eps_{ij}}=\frac{T_{ij}}{\gamma_{ij}}.
 
 ------------------------
 

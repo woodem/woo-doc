@@ -50,7 +50,7 @@ Current element configuration is stored in :obj:`woo.fem.Tet4.node`; its origin 
 
    where :math:`c_n`, :math:`d_n` are respectively :math:`n`-th rows of :math:`C` and :math:`D`; those are 4-tuples, or non-unit quaternions :math:`\mathbf{q}=(q_0,q_x,q_y,q_z)` and the :math:`\beta` function is defined as
 
-   .. math:: \beta(c,d)&=\left[d^\circ\right]_L-\left[c^\circ\right]_R
+   .. math:: \beta(c,d)=\left[d^\circ\right]_L-\left[c^\circ\right]_R
 
 4. Compute the smallest eigenvalue of the 4x4 :math:`\mathcal{B}(C,D)` matrix; since the matrix is symmetric, the eigenvalue is real; the corresponding eigenvector is normalized and assigned to :obj:`~woo.core.Node.ori` of the element frame.
 
