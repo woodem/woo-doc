@@ -3,6 +3,39 @@
 Granular
 =========
 
+Sieving
+--------
+
+The rolling screen is used for sieving of granular material. The simulation was evaluating not mass rates and PSD for each individual section of the screen. Improvements of the screen design were validated using batch of simulations with several varying parameters.
+
+This video is a HQ rendering of the screen being filled (via POV-Ray; set the video to 1440HD for better quality):
+
+.. youtube:: p1VxvvNXDQc
+
+
+This is a detail on the gap:
+
+.. youtube:: 66N2ltj2sFk
+
+This was an experimental small-size screen with vibrating cylinders:
+
+.. youtube:: 2jYLx89etaM
+
+
+This screen had several decks and complex transitions:
+
+.. image:: fig/roro-complex-b.png
+
+
+.. image:: fig/screen.png
+   :width: 100%
+
+This is a plot of PSDs in 3 different parts of the screen for batch with varying feed flow rates; it is collected as statistics of pellets passing through individual gaps:
+
+.. image:: fig/rainbow.png
+   :width: 100%
+
+
 Jamming
 --------
 
@@ -40,25 +73,3 @@ The chute on the image was exhibiting segregation of fractions, desipte them bei
    :width: 100%
 
 
-Sieving
---------
-
-The rolling screen is used for sieving of granular material. The simulation was evaluating not mass rates and PSD for each individual section of the screen. Improvements of the screen design were validated using batch of simulations with several varying parameters.
-
-.. image:: fig/screen.png
-   :width: 100%
-
-This is a plot of PSDs in 3 different parts of the screen for batch with varying feed flow rates:
-
-.. image:: fig/rainbow.png
-   :width: 100%
-
-
-This was an experimental small-size screen with vibrating cylinders:
-
-.. youtube:: 2jYLx89etaM
-
-
-This screen had several decks and complex transitions:
-
-.. image:: fig/roro-complex-b.png
