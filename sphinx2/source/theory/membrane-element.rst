@@ -4,14 +4,14 @@
 Membrane element
 =================
 
-Membrane elements are special 3-node particles in DEM. They have their mass lumped into nodes and respond to plane-stress stretching (CST element) and bending (DKT element; optional, enabled by setting the :obj:`bending flag <woo.dem.In2_FlexFacet_ElastMat.bending>`). These two elements are superposed. The element has constant thickness. Each node has 6 DoFs:
+Membrane elements are special 3-node particles in DEM. They have their mass lumped into nodes and respond to plane-stress stretching (CST element) and bending (DKT element; optional, enabled by setting the :obj:`bending flag <woo.dem.In2_Membrane_ElastMat.bending>`). These two elements are superposed. The element has constant thickness. Each node has 6 DoFs:
 
 #. two in-plane translations (gathered in :obj:`woo.fem.Membrane.uXy` for all nodes as a 6-vector), used by the CST element;
 #. one out-of-plane translation -- defines rigid motion of the whole element and causes no internal response;
 #. two in-plane rotations (gathered in :obj:`woo.fem.Membrane.phiXy` for all nodes as a 6-vector), used by the DKT element;
 #. one out-of-plane rotation (drilling DoF), which is ignored.
 
-Lumping mass into nodes is not automatic. The user is responsible for assigning proper values of :obj:`woo.dem.DemData.mass` and :obj:`woo.dem.DemData.inertia` to nodes.
+Mass and intertia of nodes are computed and lumped into nodes (this only requires geometry and material density), but it must be requested by calling :obj:`woo.dem.DemData.setOriMassInertia` on the node, once all its attached particles are in place. Details :ref:`below <membrane-lumped>`.
 
 Element coordinate system
 -------------------------
@@ -50,16 +50,34 @@ where :math:`E` is :obj:`Young modulus <woo.dem.ElastMat.young>` and :math:`\nu`
 Since :obj:`membrane thickness <woo.dem.In2_FlexFacet_ElastMat.thickness>` :math:`h` is constant over the element, we may write the stiffness matrix as (:cite:`FelippaIFEM`, (15.21)):
 
 .. math:: \mat{K^{\mathrm{CST}}}=A h \mat{B}^T \mat E \mat B.
+   :label: cst-KAhBEB
 
 This matrix is stored as :obj:`woo.fem.Membrane.KKcst`.
 
 :obj:`Displacements <woo.fem.Membrane.uXy>` :math:`\vec{u}` (6-vector) are computed by subtracting :obj:`reference positions <woo.fem.Membrane.refPos>` from the current nodal positions in best-fit local coordinates. Nodal forces (6-vector) are 
 
 .. math:: \vec{F}^{\mathrm{CST}}=\begin{pmatrix}F_{x1}\\F_{y1}\\F_{x2}\\F_{y2}\\F_{x3}\\F_{y3}\end{pmatrix}=\mat{K}^{\mathrm{CST}}\vec{u}.
+   :label: cst-fKu
 
 This is an example of a CST-only mesh, no bending (:woosrc:`examples/membrane1.py`):
 
 .. youtube:: jimWu0_8oLc
+
+.. _cst-stresses:
+
+Stresses
+""""""""
+
+Stresses don't come up as such in the FEM, being hidden in eqs. :eq:`cst-KAhBEB` and :eq:`cst-fKu`:
+
+.. math:: \vec{F}^\mathrm{CST}=A h \mat{B}^T \underbrace{\mat{E}\mat{B}\vec{u}}_{\vec{\sigma}^\mathrm{CST}}.
+
+Note that :math:`\vec{\sigma}^\mathrm{CST}` are in local coordinates, that's why they are then converted (by left-multiplication) to forces in global coordinates through :math:`Ah\mat{B}^T`.
+
+In the implementation, the :math:`\mat{E}\mat{B}` product is normally not stored in element, since it is not used in reaction computation. For that reason, it must be explicitly requested by setting :obj:`Membrane.enableStress <woo.fem.Membrane.enableStress>` before stiffness matrix is evaluated. When stiffness matrix is then built, the :math:`\mat{E}\mat{B}` product will be stored in :obj:`Membrane.EBcst <woo.fem.Membrane.EBcst>` as side-effect. It can be then used to compute stresses either explicitly by multiplying :obj:`EBcst <woo.fem.Membrane.EBcst>` × :obj:`uXy <woo.fem.Membrane.uXy>`, or using the shorthand :obj:`Membrane.stressCst <woo.fem.Membrane.stressCst>`.
+
+.. note:: Stresses returned are in element-local coordinates and they are constant over the entire element; the order is :math:`(\sigma_x,\sigma_y,\sigma_{xy})`; to transform to global coordinates, call :obj:`Membrane.stressCst(glob=True) <woo.fem.Membrane.stressCst>` (the result will be stress tensor represented as 3×3 matrix).
+
 
 Discrete Krichhoff Triangle (DKT) Element
 -----------------------------------------
@@ -68,7 +86,7 @@ The DKT (bending) element is implemented following :cite:`Batoz1980`. The bendin
 
 .. math:: \mat{D}_b=\frac{E h^3}{12(1-\nu^2)}\begin{pmatrix}1 & \nu & 0 \\ \nu & 1 & 0 \\ 0 & 0 & \frac{1-\nu}{2}\end{pmatrix}
 
-where the thickness :math:`h` may be :obj:`different thickness <woo.dem.In2_FlexFacet_ElastMat.bendThickness>` than the one used for the CST element. The strain-displacement transformation matrix for bending reads (:cite:`Batoz1980`, (30))
+where the thickness :math:`h` may be :obj:`different thickness <woo.fem.In2_Membrane.bendThickness>` than the one used for the CST element (different thicknesses are mostly not useful). The strain-displacement transformation matrix for bending reads (:cite:`Batoz1980`, (30))
 
 .. math:: \mat{B}_{b}(\xi,\eta)=\frac{1}{2A}\begin{pmatrix}y_{31}\vec{H}_{x,\xi}^T+y_{12}\vec{H}_{x,\eta}^T \\ -x_{31}\vec{H}_{y,\xi}^T-x_{12}\vec{H}_{y,\eta}^T \\ -x_{31}\vec{H}_{x,\xi}^T-x_{12}\vec{H}_{x,\eta}^T+y_{31}\vec{H}_{y,\xi}^T+y_{12}\vec{H}_{y,\eta}^T \end{pmatrix}.
 
@@ -101,6 +119,19 @@ Since out-of-plane translations :math:`u_{zi}` are always zero (they determine r
 The :woosrc:`examples/membrane2.py` script shows the combined response of CST and DKT elements:
 
 .. youtube:: KmQWD_MfR8M
+
+
+Stresses
+""""""""
+
+.. warning:: This is not functional yet in the code.
+
+Moments can be computed as (:cite:`Batoz1980`, (32))
+
+.. math:: \mat{M}(x,y)=\mat{D}_b\mat{B}(x,y)\vec{U}
+
+Similar as with :ref:`with CST <cst-stresses>`, stress evaluation needs some extra data (namely, the :math:`\mat{D}_b\mat{B}(x,y)` term) of which availability must be requested by the user through :obj:`Membrane.enableStress <woo.fem.Membrane.enableStress>`; :obj:`DBdkt <woo.fem.Membrane.DBdkt>` will be stored when stiffness matrix is computed as side-effect; stress can be obtained by hand-multiplication with rotations (:obj:`phiXy <woo.fem.Membrane.phiXy>`) or using the shorthand function :obj:`Membrane.stressDkt <woo.fem.Membrane.stressDkt>`.
+
 
 Total nodal forces
 ------------------
@@ -148,6 +179,9 @@ This video demonstrates the :obj:`cylindrical triaxial test <woo.pre.cylTriax.Cy
 
 .. youtube:: Li13NrIyMYU
 
+
+
+.. _membrane-lumped:
 
 Lumped mass and inertia
 ------------------------
