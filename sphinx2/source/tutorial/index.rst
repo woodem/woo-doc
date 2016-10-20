@@ -9,5 +9,4 @@ Tutorial
    mesh.rst
    impose.rst
    inlets.rst
-   batch.rst
    export.rst

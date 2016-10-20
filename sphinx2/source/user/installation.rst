@@ -35,13 +35,13 @@ Package installation
 
    the packaged version of ``ipython`` does not support ``qt5`` yet. This can be fixed by installing a newer version from `Python package index (a.k.a. PyPI) <https://pypi.python.org/>`__ by running (provided you have ``pip3`` installed; if not, run ``sudo apt-get install python3-pip``)::
 
-      pip3 install 'ipython>=3.0,<4'
+      pip3 install ipython
 
    or::
 
-      sudo pip3 install --system 'ipython>=3.0,<4'     # installation for all users
+      sudo pip3 install --system ipython     # installation for all users
 
-   which should pull version 3.x from PyPI and install it locally; this newer version will take precedence over the one installed from APT packages, no problem to have both installed at the same time. After this, ``woo`` should launch normally.
+   which should pull IPython from PyPI and install it locally; this newer version will take precedence over the one installed from APT packages, no problem to have both installed at the same time. After this, ``woo`` should launch normally.
 
 
 Compilation from source
