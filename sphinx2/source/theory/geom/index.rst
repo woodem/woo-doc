@@ -24,6 +24,12 @@ The geometry computation (performed by various :obj:`woo.dem.CGeomFunctor` subcl
    ellipsoid.rst
    capsule.rst
 
+Additional topics dealing with contact geometry are described in the following sections:
+
+.. toctree::
+   
+   facet-smooth-edge.rst
+
 
 Particle shapes
 ----------------

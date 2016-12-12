@@ -38,4 +38,5 @@ The first task is covered in the :ref:`contact_geometry` chapter while the last 
    adhesive.rst
    concrete.rst
    ice.rst
+   luding.rst
 
