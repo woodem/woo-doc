@@ -13,8 +13,8 @@ extras:
 	cd sphinx2/source; PYTHONPATH=. woo-mt -x --fake-display -R gen.py --quirks=0 --only-extras
 upload:
 	rsync -r sphinx2/build/html/ woodem:woo-doc/
-	rsync -r sphinx2/build/latex/Woo.pdf woodem:woo-doc/Woo.pdf
 	for ex in sphinx2/build-extra/*; do rsync -r $$ex/html/ woodem:woo-private/`basename $$ex`/doc/; done
+	rsync -r sphinx2/build/latex/Woo.pdf woodem:woo-doc/Woo.pdf
 uploadpng:
 	rsync -r sphinx2/build/html/ woodem:woo-doc-png/
 	for ex in sphinx2/build-extra/*; do rsync -r $$ex/html/ woodem:woo-private/`basename $$ex`/doc-png/; done

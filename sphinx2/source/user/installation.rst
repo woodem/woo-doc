@@ -55,9 +55,9 @@ Woo is written in `C++11 <http://en.wikipedia.org/wiki/C%2B%2B11>`_ and can be c
 Woo depends on a number of libraries. Those are in particular
 
 #. `boost <http://www.boost.org>`_, version >= 1.48.
-#. `python <http://www.python.org>`_, version 2.7 (versions 3.x are currently unsupported)
+#. `python <http://www.python.org>`_, version 2.7 or >= 3.4 (support for 2.7 is currently retained, but will be removed in the future)
 #. `eigen <http://eigen.tuxfamily.org>`_ (math routines)
-#. `Qt4 <http://qt.digia.com>`_ and `PyQt4 <http://www.riverbankcomputing.co.uk/software/pyqt>`_ (optional: user interface)
+#. `Qt5 <http://qt.digia.com>`_ and `PyQt5 <http://www.riverbankcomputing.co.uk/software/pyqt>`_ (optional: user interface), or Qt4 (older, but supported)
 #. `VTK <http://www.vtk.org>`_ (optional: export to `Paraview <http://www.paraview.org>`_)
 #. `GTS <http://gts.sourceforge.net>`_ (optional: manipulation of triangulated surfaces)
 #. `FreeGLUT <http://freeglut.sourceforge.net>`_, `GLE <http://www.linas.org/gle>`_ (optional: OpenGL display)

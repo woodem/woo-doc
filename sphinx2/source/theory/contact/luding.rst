@@ -183,10 +183,10 @@ This table summarizes corresponding attributes in the WooDEM code. Since propert
 .. csv-table::
    :header: ,normal,tangent,rolling,twisting
 
-   stiffness,:obj:`~woo:woo.dem.FrictPhys.kn`,:obj:`~woo:woo.dem.FrictMat.ktDivKn` *,:obj:`~woo:woo.dem.LudingMat.krDivKn` #,:obj:`~woo:woo.dem.LudingMat.kwDivKn` #
-   adhesion,:obj:`~woo:woo.dem.LudingMat.adhDivKn` *,--,--,--
-   static friction,--,:obj:`~woo:woo.dem.FrictMat.tanPhi` †,:obj:`~woo:woo.dem.LudingMat.statR` †,:obj:`~woo:woo.dem.LudingMat.statW` †
-   dynamic friciton,--,:obj:`~woo:woo.dem.LudingMat.dynDivStat` †,:obj:`~woo:woo.dem.LudingMat.dynDivStat` †,:obj:`~woo:woo.dem.LudingMat.dynDivStat` †
-   viscous coefficient,:obj:`~woo:woo.dem.LudingMat.viscN` †,:obj:`~woo:woo.dem.LudingMat.viscT` †,:obj:`~woo:woo.dem.LudingMat.viscR` †,:obj:`~woo:woo.dem.LudingMat.viscW` †
+   stiffness,:obj:`woo.dem.FrictPhys.kn`,:obj:`woo.dem.FrictMat.ktDivKn` *,:obj:`woo.dem.LudingMat.krDivKn` #,:obj:`woo.dem.LudingMat.kwDivKn` #
+   adhesion,:obj:`woo.dem.LudingMat.adhDivKn` *,--,--,--
+   static friction,--,:obj:`woo.dem.FrictMat.tanPhi` †,:obj:`woo.dem.LudingMat.statR` †,:obj:`woo.dem.LudingMat.statW` †
+   dynamic friciton,--,:obj:`woo.dem.LudingMat.dynDivStat` †,:obj:`woo.dem.LudingMat.dynDivStat` †,:obj:`woo.dem.LudingMat.dynDivStat` †
+   viscous coefficient,:obj:`woo.dem.LudingMat.viscN` †,:obj:`woo.dem.LudingMat.viscT` †,:obj:`woo.dem.LudingMat.viscR` †,:obj:`woo.dem.LudingMat.viscW` †
 
 
