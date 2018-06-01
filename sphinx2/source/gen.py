@@ -35,10 +35,17 @@ if not '--only-extras' in sys.argv:
             f.write('    %s\n'%o)
     if 1:
         for fmt in 'html','latex':
-            args=['','-T','-b',fmt,'-j','1','-d','../build/doctrees','../source','../build/%s'%fmt]
-            print('Calling sphinx.build_main with: '+' '.join(args))
+            # see discussion of https://github.com/sphinx-doc/sphinx/issues/4623
+            # the first arg used to be ignored, now is used
+            args=['-T','-b',fmt,'-j','1','-d','../build/doctrees','../source','../build/%s'%fmt]
+            print('Calling sphinx.cmd.build.build_main with: '+str(args))
             builtins.woo_sphinx_fmt=fmt # this is used in conf.py
-            sphinx.build_main(args)
+            # RemovedInSphinx20Warning: `sphinx.build_main()` has moved to `sphinx.cmd.build.build_main()`.
+            import sphinx.cmd.build
+            sphinx.cmd.build.build_main(args)
+            print('Sphinx finished for format %s.'%fmt)
+
+
 
 #
 # document extra modules, in separate trees
@@ -91,10 +98,10 @@ latex_logo='../../source/woo-logo.pdf'
         ))
     if 1:
         for fmt in 'html','latex':
-            args=['','-T','-b',fmt,'-j','1','-d','../build-doctrees',srcDir,outDir+'/'+fmt]
-            print('Calling sphinx.build_main with: '+' '.join(args))
+            args=['-T','-b',fmt,'-j','1','-d','../build-doctrees',srcDir,outDir+'/'+fmt]
+            print('Calling sphinx.build_main with: '+str(args))
             builtins.woo_sphinx_fmt=fmt # this is used in conf.py
-            sphinx.build_main(args)
+            sphinx.cmd.build.build_main(args)
 
         
 

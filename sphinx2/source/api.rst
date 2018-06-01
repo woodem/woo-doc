@@ -17,6 +17,18 @@ Changes
 
 This page keeps track of major (and some minor) API changes for the purposes of updating the code and also for warning when older API is being used, possibly with different results.
 
+
+API 10104
+"""""""""
+
+.. note:: This API change was commited Oct 3, 2017
+
+* Deprecate ``woo.dem.Cp2_FrictMat_HertzPhys`` and introduce ``woo.dem.HertzMat`` and ``woo.dem.Cp2_HertzMat_HertzPhys``. This means that surface energy ``surfEnergy`` and the Carpick-Ogletree-Solmeron ``alpha`` parameter are passed through :obj:`woo.dem.HertzMat` and can be different for different material, whereas previously they had to be set per-simulation. :obj:`woo.models.ContactModelSelector` will raise an exception when its ``alpha`` and ``surfEnergy`` are assigned, since that menas the user is not aware of this change. 
+
+  Migration to the new API means using :obj:`woo.dem.HertzMat` (instead of :obj:`woo.dem.FrictMat`), assigning :obj:`woo.dem.HertzMat.surfEnergy` and :obj:`woo.dem.HertzMat.alpha` to the material instance (not to the ``woo.dem.Cp2_FrictMat_HertzPhys`` functor) and replacing ``woo.dem.Cp2_FrictMat_HertzPhys`` with :obj:`woo.dem.Cp2_HertzMat_HertzPhys`.
+
+  If :obj:`woo.models.ContactModelSelector` is used, material types have to be changed but new functors will be returned automatically.
+
 API 10103
 """""""""
 

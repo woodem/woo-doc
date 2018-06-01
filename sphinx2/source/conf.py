@@ -45,10 +45,10 @@ try:
 except ImportError:
     raise ImportError("BibTeX support for sphinx not found; install it using 'pip install sphinxcontrib-bibtex'")
 
-try:
-    import sphinxcontrib.embedly
-except ImportError:
-    raise ImportError("Embedly support for sphinx not found; install it using 'pip install sphinxcontrib-embedly'")
+#try:
+#    import sphinxcontrib.embedly
+#except ImportError:
+#    raise ImportError("Embedly support for sphinx not found; install it using 'pip install sphinxcontrib-embedly'")
 
 #try:
 #    import sphinxcontrib.exceltable
@@ -59,11 +59,13 @@ except ImportError:
 mathjax=('PNGMATH' not in os.environ)
 if not mathjax: print(100*'#'+'  USING PNGMATH  '+100*'#')
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.mathjax' if mathjax else 'sphinx.ext.pngmath', 'sphinx.ext.viewcode', 'matplotlib.sphinxext.plot_directive', 'sphinx.ext.inheritance_diagram', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.extlinks', 'sphinxcontrib.bibtex' ,'sphinxcontrib.embedly',
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.mathjax' if mathjax else 'sphinx.ext.pngmath', 'sphinx.ext.viewcode', 'matplotlib.sphinxext.plot_directive', 'sphinx.ext.inheritance_diagram', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.extlinks', 'sphinxcontrib.bibtex', #,'sphinxcontrib.embedly',
+    'sphinxcontrib.tikz',
+    # 'sphinxcontrib.youtube',
     # ,'sphinxcontrib.exceltable',
     # local copies
     'sphinxcontrib_youtube',
-    'tikz',
+    #'tikz',
     'IPython.sphinxext.ipython_directive','IPython.sphinxext.ipython_console_highlighting',
     # experimental
     # 'breathe'
@@ -190,7 +192,8 @@ master_doc = 'contents'
 
 # General information about the project.
 project = u'Woo'
-copyright = u'2012−2015, Václav Šmilauer <eu@doxos.eu>'
+import datetime
+copyright = u'2012−%d, Václav Šmilauer <eu@doxos.eu>'%(datetime.datetime.now().year)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -342,7 +345,7 @@ latex_elements = {
 'inputenc':r'\usepackage{xcolor}', ## trick to get xcolor included before sphinx.sty, avoiding warnings about colors
 'utf8extra':'',
 'fontenc':'',
-'fncychap':'\usepackage[Conny]{fncychap}',
+'fncychap':r'\usepackage[Conny]{fncychap}',
 # 'babel':r'\usepackage{polyglossia}\setmainlanguage{english}',
 'printindex':r'\begin{small}\printindex\end{small}',
 # Additional stuff for the LaTeX preamble.
