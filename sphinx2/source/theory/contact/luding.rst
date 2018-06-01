@@ -64,13 +64,13 @@ Dissipation (work) has two components:
 
    .. math::
 
-      \delta_0&=\delta_{\rm max}(k_{n1}-k_{n2})
+      \delta_0&=\delta_{\rm max}\left(1-\frac{k_{n1}}{k_{n2}}\right)
 
-      -k_{nc}\delta_{\rm min}&=-(\delta_0-\delta_{\rm min})k_{n2})
+      -k_{na}\delta_{\rm min}&=-(\delta_0-\delta_{\rm min})k_{n2}
 
-      \delta_{\min}&=\delta_0\frac{k_{n2}}{k_{n2}+k_{nc}}
+      \delta_{\min}&=\delta_0\frac{k_{n2}}{k_{n2}+k_{na}}
 
-      W_{np}&=(k_{n1}\delta_{\rm max}+k_{nc}\delta_{\rm min})\delta_0
+      W_{np}&=(k_{n1}\delta_{\rm max}+k_{na}\delta_{\rm min})\delta_0
 
 
 Rescaled damping coefficient, typical contact duration and restitution coefficient can be respectively computed as
@@ -124,7 +124,7 @@ trial force (2d vector in tangential plane) being computed from tangential stiff
 
 where tangential stiffness is defined as :math:`k_{t}=\hat{k}_{n2}\frac{k_t}{k_n}`.
 
-1. If :math:`|\vec{f}_t|\leq f_y^y`, static friction is active (zer plastic dissipation) and
+1. If :math:`|\vec{f}_t|\leq f_y^y`, static friction is active (zero plastic dissipation) and
 
    .. math::
    
@@ -172,7 +172,8 @@ The following table summarizes all model parameters:
 .. csv-table::
    :header: ,normal,tangent,rolling,twisting
 
-   stiffness,:math:`\hat{k}_{n2}` ,:math:`k_t/k_n`,:math:`(k_r/k_n)a_{12}`,:math:`(k_w/k_n)a_{12}`
+   stiffness,:math:`\hat{k}_{n2}`,:math:`k_t/k_n`,:math:`(k_r/k_n)a_{12}`,:math:`(k_w/k_n)a_{12}`
+   normal plasticity,:math:`\frac{k_{n1}}{\hat{k}_{n2}}` :math:`\delta_{\rm lim}`,--,--,--
    adhesion,:math:`k_{nc}/k_n`,--,--,--
    static friction,--,:math:`\tan\phi_t`,:math:`\tan\phi_r`,:math:`\tan\phi_w`
    dynamic friction,--,:math:`\phi_d`,:math:`\phi_d`,:math:`\phi_d`
@@ -183,10 +184,11 @@ This table summarizes corresponding attributes in the WooDEM code. Since propert
 .. csv-table::
    :header: ,normal,tangent,rolling,twisting
 
-   stiffness,:obj:`woo.dem.FrictPhys.kn`,:obj:`woo.dem.FrictMat.ktDivKn` *,:obj:`woo.dem.LudingMat.krDivKn` #,:obj:`woo.dem.LudingMat.kwDivKn` #
-   adhesion,:obj:`woo.dem.LudingMat.adhDivKn` *,--,--,--
-   static friction,--,:obj:`woo.dem.FrictMat.tanPhi` †,:obj:`woo.dem.LudingMat.statR` †,:obj:`woo.dem.LudingMat.statW` †
-   dynamic friciton,--,:obj:`woo.dem.LudingMat.dynDivStat` †,:obj:`woo.dem.LudingMat.dynDivStat` †,:obj:`woo.dem.LudingMat.dynDivStat` †
-   viscous coefficient,:obj:`woo.dem.LudingMat.viscN` †,:obj:`woo.dem.LudingMat.viscT` †,:obj:`woo.dem.LudingMat.viscR` †,:obj:`woo.dem.LudingMat.viscW` †
+   stiffness,:obj:`~woo.dem.LudingPhys.k2hat`,:obj:`~woo.dem.FrictMat.ktDivKn` *,:obj:`~woo.dem.LudingMat.krDivKn` #,:obj:`~woo.dem.LudingMat.kwDivKn` #
+   normal plasticity, :obj:`~woo.dem.LudingMat.k1DivKn` * :obj:`~woo.dem.LudingMat.deltaLimRel` *,--,--,--
+   adhesion,:obj:`~woo.dem.LudingMat.kaDivKn` *,--,--,--
+   static friction,--,:obj:`~woo.dem.FrictMat.tanPhi` †,:obj:`~woo.dem.LudingMat.statR` †,:obj:`~woo.dem.LudingMat.statW` †
+   dynamic friciton,--,:obj:`~woo.dem.LudingMat.dynDivStat` †,:obj:`~woo.dem.LudingMat.dynDivStat` †,:obj:`~woo.dem.LudingMat.dynDivStat` †
+   viscous coefficient,:obj:`~woo.dem.LudingMat.viscN` †,:obj:`~woo.dem.LudingMat.viscT` †,:obj:`~woo.dem.LudingMat.viscR` †,:obj:`~woo.dem.LudingMat.viscW` †
 
 

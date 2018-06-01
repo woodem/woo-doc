@@ -3,8 +3,8 @@
 gen:
 	rm -rf sphinx2/build/html sphinx2/build/latex sphinx2/build/doctrees sphinx2/build-extra sphinx2/source-extra
 	rm -f sphinx2/source/{woo,wooExtra,wooMain}.*.rst
-	cd sphinx2/source; PYTHONPATH=. woo-mt -x --fake-display  --quirks=0 -R gen.py
-	cd sphinx2/build/latex; xelatex -interaction=batchmode Woo.tex; makeindex Woo; xelatex -interaction=nonstopmode Woo.tex; true
+	cd sphinx2/source; PYTHONPATH=. woo-mt -RD -x --fake-display --quirks=0 gen.py; echo $?
+	cd sphinx2/build/latex; lualatex -interaction=batchmode Woo.tex; makeindex Woo; lualatex -interaction=nonstopmode Woo.tex; true
 	# python -c 'import webbrowser; webbrowser.open("file://${PWD}/sphinx2/build/html/index.html")'
 sphinxonly:
 	cd sphinx2/source; PYTHONPATH=. woo-mt -x --fake-display --quirks=0 gen.py
@@ -18,4 +18,4 @@ upload:
 uploadpng:
 	rsync -r sphinx2/build/html/ woodem:woo-doc-png/
 	for ex in sphinx2/build-extra/*; do rsync -r $$ex/html/ woodem:woo-private/`basename $$ex`/doc-png/; done
-default: gen upload
+default: gen extras upload

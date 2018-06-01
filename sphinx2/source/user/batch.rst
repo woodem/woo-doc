@@ -38,7 +38,7 @@ Let us summarize important parameters for everyday use:
 ``--job-threads``
 	Number of threads *for each simulation*. Defaults to 1. Depending on size of the batch, you may want to increase this number. E.g. running a batch 2 simulations on a 6-core machine can take advantage of setting ``--job-threads=3``.
 ``--results``
-	Results from each simulation are written incrementally to an `SQLite <http://www.sqlite.org>`_ file. This file, by default, named same as the batch table, but with the ``.results`` extension, but it can be changed.
+	Results from each simulation are written incrementally to a `HDF5 <http://hdf.org>` or `SQLite <http://www.sqlite.org>`_ file. This file, by default, named same as the batch table, but with the ``.hdf5`` extension, but it can be changed.
 
 
 .. _batch_example:
