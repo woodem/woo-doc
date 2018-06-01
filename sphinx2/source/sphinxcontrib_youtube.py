@@ -5,8 +5,7 @@ from __future__ import division
 
 import re
 from docutils import nodes
-from docutils.parsers.rst import directives
-from sphinx.util.compat import Directive
+from docutils.parsers.rst import directives, Directive
 
 CONTROL_HEIGHT = 30
 
@@ -110,4 +109,3 @@ def setup(app):
         latex=(visit_youtube_node_latex, depart_youtube_node)
     )
     app.add_directive("youtube", YouTube)
-
