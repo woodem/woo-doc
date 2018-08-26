@@ -151,6 +151,31 @@ Woo can also be compiled using distutils, which uses ``setup.py`` to drive the c
 Windows
 =======
 
+Windows Subsystem for Linux
+----------------------------
+
+WSL supports running native Linux apps inside Windows. Follow `official Microsoft docs <https://docs.microsoft.com/en-us/windows/wsl/install-win10>`__ to install WSL itself, choose to install Ubuntu 18.04 inside the WSL.
+
+Once this is done, install a X-server (display server for Linux apps), we recommend `VcXsrv <https://sourceforge.net/projects/vcxsrv/>`__. Woo itself will run without display server just fine but GUI will be disabled.
+
+VcXsrv should be started with the multiple windows option, and **disabling native OpenGL** (see `Does WSL support OpenGL? <https://github.com/Microsoft/WSL/issues/2855>`__):
+
+.. figure:: fig/wsl-vcxsrv-opengl.png
+
+You can install Woo from source as usual, you can also use `script <https://raw.githubusercontent.com/woodem/woo/master/scripts/woo-install.py>`__ to install from source; in the terminal, type::
+
+   $ wget https://raw.githubusercontent.com/woodem/woo/master/scripts/woo-install.py
+   $ python3 woo-install.py
+
+Once the compilation finishes, you should be able to run ``woo`` as normally in Linux. You have to set the ``DISPLAY`` environment variable (by hand, or export it in ``~/.bashrc`` to be set automatically. Shortcuts might not work in the Windows terminal (under investigation), you might need to type ``woo.qt.Controller()`` to open the controller window.
+
+.. figure:: fig/wsl-controller.png
+
+
+
+Obsolete instructions (native build)
+-------------------------------------
+
 Running woo under Windows is supported, but with some limitations:
 
 #. Only 64bit systems are supported.
