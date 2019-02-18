@@ -12,7 +12,9 @@ Package installation
 
 .. admonition:: Ubuntu
 
-   Installation from pre-compiled packages is the recommended method of installation. You will receive updates automatically via your system's package manager. `Woo-daily package archive <https://code.launchpad.net/~eudoxos/+archive/woo-daily>`_ contains the packages. The oldest supported version is 14.04 LTS, but you are well advised to stay with newer (e.g. last LTS) if possible.
+   Installation from pre-compiled packages is **no longer** the recommended method of installation. The packages are often broken or out of date. For the posterity, outdated instructions follow; use at your own danger.
+   
+   You will receive updates automatically via your system's package manager. `Woo-daily package archive <https://code.launchpad.net/~eudoxos/+archive/woo-daily>`_ contains the packages. The oldest supported version is 14.04 LTS, but you are well advised to stay with newer (e.g. last LTS) if possible.
    
    Open the terminal and type::
 
@@ -70,7 +72,7 @@ Compilation is driven using `scons <http://www.scons.org>`_ and takes a number o
 -  ``features``: Comma-separated list of features to compile with. Important values are
 
    * ``openmp``: Compile with OpenMP, to support multi-threaded computations. This feature is supported only by ``gcc`` (not ``clang``). Note that number of threads can be set :ref:`at runtime <Running_Woo>` using the ``-jN`` option.
-   * ``qt4``: Enable user interface based on Qt4;
+   * ``qt4``: Enable user interface based on Qt4 (**deprecated**);
    * ``qt5``: Enable user interface based on Qt5;
    * ``opengl``: Enable 3D display during simulations; requires ``qt4`` or ``qt5`` to be enabled as well.
    * ``vtk``: Enable export to file using VTK file formats, for export to `Paraview <http://www.paraview.org>`_.
@@ -100,41 +102,36 @@ If you want to use SCons for building (which is quite useful for keeping your in
 .. code-block:: bash
 
     # install the support for virtual environments
-    pip install virtualenv
+    pip3 install virtualenv
     # create the virtual environment in some directory
     virtualenv my/venv
     # sets environment variables (e.g. $PATH) so that venv commands are found first
     source my/venv/bin/activate
-    # install scons (needs the --egg option)
-    pip install --egg scons
     # install all required python modules, this may take a while
     # note: headers for HDF5 must be installed (libhdf5-dev)
-    pip install cython minieigen ipython numpy matplotlib genshi xlwt xlrd h5py lockfile psutil pillow colour-runner
+    pip install git+https://github.com/eudoxos/minieigen.git
+    pip install git+https://github.com/python-xlib/python-xlib
+    pip install scons cython ipython numpy matplotlib genshi xlwt xlrd h5py lockfile psutil pillow colour-runner future
     # if you need the GUI, also run this (and add opengl,qt4 features to scons below)
-    pip install svn+https://svn.code.sf.net/p/python-xlib/code/trunk/  # xlib
-    ln -s /usr/lib/python2.7/dist-packages/{sip*,PyQt4} $VIRTUAL_ENV/lib/python2.7/site-packages
-    # checkout the source from Launchpad
+    ln -s /usr/lib/python3/dist-packages/{sip*,PyQt5} $VIRTUAL_ENV/lib/python$(python -c'import sys; print("%d.%d"%(sys.version_info[0:2]))')/site-packages
+    # checkout the source
     git clone https://github.com/woodem/woo.git
     ### for wooExtra modules (if you need some)
     ## create directory for extras
     mkdir woo/wooExtra
     ## checkout extras, put them under there so that they are installed automatically
-    git clone URL woo/wooExtra/...    
+    git clone URL woo/wooExtra/...
     cd woo
-    # compile the source
-    scons features='vtk,gts,openmp' # + BUNCH OF OTHER OPTIONS
+    # compile the source, put all options necessary (saved in scons.flavor-default)
+    scons features='vtk,gts,openmp,hdf5' CPPPATH='/usr/include/vtk-6.3:/usr/include/eigen3:/usr/include/hdf5/serial'
     # run self-tests to check that everything is OK
     woo --test
     # exit the virtual environment
-    deactivate                       
+    deactivate
 
 The ``woo`` executable remembers virtual python used during the build (in `shebang <http://en.wikipedia.org/wiki/Shebang_%28Unix%29>`__), so you can also execute it *without* activating the virtual environment (by saying ``my/venv/bin/woo``) the next time, and it *should* work (including recompilation with ``-R`` or ``-RR``), **unless** you have another installation of woo system-wide (in that case, make sure you always activate the virtual environment properly).
 
-.. note:: There is a script for quick creation of virtual installation, which is useful e.g. for keeping exact installed version despite ongoing development. It is located in :woosrc:`scripts/make-venv.sh` and can be run e.g. as::
-
-    $ scripts/make-venv.sh path/to/venv name /woo/source/tree
-
-  which will create the virtual environment and compile and install Woo in it.
+.. note:: There used to be a script ``scripts/make-venv.sh`` which contained the above commands; it cannot be maintained meaningfully in the repo, create one for yourself based on the code above if you need it.
 
 
 Distribution-specific instructions
