@@ -34,7 +34,7 @@ if not '--only-extras' in sys.argv:
                 continue
             f.write('    %s\n'%o)
     if 1:
-        for fmt in 'html','latex':
+        for fmt in ['html','latex']:
             # see discussion of https://github.com/sphinx-doc/sphinx/issues/4623
             # the first arg used to be ignored, now is used
             args=['-T','-b',fmt,'-j','1','-d','../build/doctrees','../source','../build/%s'%fmt]

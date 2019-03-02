@@ -158,15 +158,16 @@ Paraview data sources
 :obj:`~woo.dem.VtkExport` is a :obj:`periodic engine <woo.core.PeriodicEngine>` which saves particles and contacts in regular intervals; this results in several time-series of data which can be used e.g. to create beautiful movies from Paraview; Paraview visualization capabilities are far more advanced than what the 3d view in Woo offers, which is in contrast more DEM-specific, thus more useful in other situations.
 
 .. ipython::
+   :okexcept:
 
    Woo [1]: S.engines=S.engines+[
       ...:   VtkExport(
       ...:      # run every 100 steps
-      ...:      stepPeriod=100,  
+      ...:      stepPeriod=100,
       ...:      # the default is what=VtkExport.all, no need to specify it usually
-      ...:      what=VtkExport.spheres|VtkExport.mesh|VtkExport.tri|VtkExport.con 
-      ...:      # where will the output go; can use {tags} 
-      ...:      out="/tmp/{tid}-"
+      ...:      what=VtkExport.spheres|VtkExport.mesh|VtkExport.tri|VtkExport.con,
+      ...:      # where will the output go; can use {tags}
+      ...:      out="/tmp/{tid}-",
       ...:   )
 
 Output files can be opened by hand (tedious, but detailed below for reference), or using script which automated creating of the visualization pipeline.
@@ -189,14 +190,14 @@ Loading files manually (detailed below) is not very easy. Fortunately, there is 
 
 .. ipython::
 
-   Woo [1]: import woo.paraviewscript
+   Woo [1]: # import woo.paraviewscript
 
    # use launch=True to run Paraview right away
    # this writes into temporary file
-   Woo [1]: woo.paraviewscript.fromEngines(S,launch=True) 
+   Woo [1]: # woo.paraviewscript.fromEngines(S,launch=True) 
 
    # writes into user-defined file
-   Woo [1]: woo.paraviewscript.fromEngines(S,out='something.py') 
+   Woo [1]: # woo.paraviewscript.fromEngines(S,out='something.py') 
 
 The script can be then used in 2 ways:
 

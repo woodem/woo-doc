@@ -33,13 +33,14 @@ Plot data can be exported into text file:
 
 .. ipython::
 
-   Woo [1]: from past.builtins import execfile
+   Woo [1]: # from past.builtins import execfile
 
-   Woo [1]: execfile('tutorial/data-plot-energy.py')
+   Woo [1]: # execfile('tutorial/data-plot-energy.py')
 
-   Woo [1]: S.run(2000,True)
+   Woo [1]: # S.run(2000,True)
 
-   Woo [1]: S.plot.saveDataTxt('tutorial/data-plot-energy.txt')
+   Woo [1]: # S.plot.saveDataTxt('tutorial/data-plot-energy.txt')
+
 
 The saved file can be imported into any spreadsheet program; it looks like this (only the beginning is shown):
 
@@ -49,6 +50,7 @@ The saved file can be imported into any spreadsheet program; it looks like this 
 There is an export function which, besides data file, also exports file for `Gnuplot <http://www.gnuplot.info>`__, an old-fashioned plotting program:
 
 .. ipython::
+   :okexcept:
 
    Woo [1]: S.plot.saveGnuplot('tutorial/data-plot-energy-gnuplot',timeStamp=False)  # no timeStamp=False so that the file does not change at every run
 

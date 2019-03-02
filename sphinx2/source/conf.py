@@ -106,14 +106,17 @@ ilex.output_prompt=re.compile(r'(( -> |Out)|\[[0-9]+\]: )')
 ilex.continue_prompt=re.compile(r'\s+\.\.\.+:')
 
 intersphinx_mapping={
-    'yade':('http://www.yade-dem.org/doc',None),
-    'python':('http://docs.python.org/%d.%d'%(sys.version_info.major,sys.version_info.minor),None),
-    'minieigen':('http://eudoxos.github.io/minieigen',None),
+    'yade':('https://www.yade-dem.org/doc',None),
+    'python':('https://docs.python.org/%d.%d'%(sys.version_info.major,sys.version_info.minor),None),
+    'minieigen':('https://eudoxos.github.io/minieigen',None),
 }
 
 # make graphviz determine the best size instead of hard-coded one
 # http://stackoverflow.com/a/2151808/761090
 inheritance_graph_attrs = dict(size='""')
+
+
+autoclass_content='both' # use both __init__ and class docstring
 
 numfig=True
 
@@ -135,7 +138,30 @@ extlinks={'woosrc':('https://github.com/woodem/woo/tree/master/%s','')}
 
 ## customize mathjax
 ## hack from https://bitbucket.org/birkenfeld/sphinx/issue/969/allow-mathjax-customization-via-localjs 
-mathjax_path = 'MathJax_local.js' # file including MathJax from CDN plus local config, in _static
+# mathjax_path = 'MathJax_local.js' # file including MathJax from CDN plus local config, in _static
+mathjax_config={
+    'TeX': {
+        'Macros': {
+            'prev': ["#1^-",1],
+            'pprev':["#1^{\\ominus}",1],
+            'curr':["#1^{\\circ}",1],
+            'nnext':["#1^{\\oplus}",1],
+            'next':["#1^{+}",1],
+            'Dt':"\\Delta t",
+            'tens':["\\boldsymbol{#1}",1],
+            'vec':["boldsymbol{#1}",1],
+            'quat':["\\boldsymbol{#1}",1],
+            'mat':["\\boldsymbol{#1}",1],
+            'u':["\\,\\mathrm{#1}",1],
+            'normalized':["\\frac{#1}{|\\cdot|}",1],
+            'd':"\\mathrm{d}\\,",
+            'phi':"\\varphi",
+            'eps':"\\varepsilon",
+            'epsilon':"\\varepsilon",
+            'tr':"\\mathop{\\rm tr}\\nolimits",
+        }
+    }
+}
 
 # config for pngmath (in case we have to use that)
 pngmath_use_preview=True
