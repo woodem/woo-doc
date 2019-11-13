@@ -97,7 +97,7 @@ latex_logo='../../source/woo-logo.pdf'
             copyright=re.sub('<[^<]+?>','',mod.distributor.replace('<br>',', '))
         ))
     if 1:
-        for fmt in 'html','latex':
+        for fmt in 'html',: # 'latex':
             args=['-T','-b',fmt,'-j','1','-d','../build-doctrees',srcDir,outDir+'/'+fmt]
             print('Calling sphinx.build_main with: '+str(args))
             builtins.woo_sphinx_fmt=fmt # this is used in conf.py
