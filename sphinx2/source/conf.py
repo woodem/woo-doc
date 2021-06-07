@@ -132,14 +132,18 @@ tikz_tikzlibraries=''
 
 # show discussion form at the bottom of every page
 disqus_shortname='woodem'
-rst_epilog='\n\n.. only:: html\n\n   .. tip::\n\n      Got questions? Ask at `ask.woodem.org <https://ask.woodem.org>`__. Report issues to `github <https://github.com/woodem/woo/issues>`__.'
+rst_epilog='\n\n.. only:: html\n\n   .. tip::\n\n      Report issues or inclarities to `github <https://github.com/woodem/woo/issues>`__.'
 
 extlinks={'woosrc':('https://github.com/woodem/woo/tree/master/%s','')}
+
+bibtex_bibfiles=['references.bib']
 
 ## customize mathjax
 ## hack from https://bitbucket.org/birkenfeld/sphinx/issue/969/allow-mathjax-customization-via-localjs 
 # mathjax_path = 'MathJax_local.js' # file including MathJax from CDN plus local config, in _static
 mathjax_config={
+    # 'extensions':['autoload','[tex]/boldsymbol'],
+    'loader':{'load':['[tex]/boldsymbol']},
     'TeX': {
         'Macros': {
             'prev': ["#1^-",1],
@@ -148,10 +152,10 @@ mathjax_config={
             'nnext':["#1^{\\oplus}",1],
             'next':["#1^{+}",1],
             'Dt':"\\Delta t",
-            'tens':["\\boldsymbol{#1}",1],
-            'vec':["boldsymbol{#1}",1],
-            'quat':["\\boldsymbol{#1}",1],
-            'mat':["\\boldsymbol{#1}",1],
+            'tens':["{\\bf #1}",1],
+            'vec':["{\\bf #1}",1],
+            'quat':["{\\bf #1}",1],
+            'mat':["{\\bf #1}",1],
             'u':["\\,\\mathrm{#1}",1],
             'normalized':["\\frac{#1}{|\\cdot|}",1],
             'd':"\\mathrm{d}\\,",
@@ -159,7 +163,8 @@ mathjax_config={
             'eps':"\\varepsilon",
             'epsilon':"\\varepsilon",
             'tr':"\\mathop{\\rm tr}\\nolimits",
-        }
+        },
+        'packages':{'[+]':['boldsymbol']},
     }
 }
 

@@ -4,7 +4,7 @@ gen:
 	rm -rf sphinx2/build/html sphinx2/build/latex sphinx2/build/doctrees sphinx2/build-extra sphinx2/source-extra
 	rm -f sphinx2/source/{woo,wooExtra,wooMain}.*.rst
 	cd sphinx2/source; PYTHONPATH=. woo -RD -x --fake-display --quirks=0 gen.py; echo $?
-	# cd sphinx2/build/latex; lualatex -interaction=batchmode Woo.tex; makeindex Woo; lualatex -interaction=nonstopmode Woo.tex; true
+	cd sphinx2/build/latex; lualatex -interaction=batchmode Woo.tex; makeindex Woo; lualatex -interaction=nonstopmode Woo.tex; true
 	# python -c 'import webbrowser; webbrowser.open("file://${PWD}/sphinx2/build/html/index.html")'
 sphinxonly:
 	cd sphinx2/source; PYTHONPATH=. woo -x --fake-display --quirks=0 gen.py
