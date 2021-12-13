@@ -241,7 +241,7 @@ Videos
 
 * Global view of the simulation (displacements scaled):
 
-    .. youtube:: http://youtube.com/watch?v=Li13NrIyMYU
+    .. youtube:: https://youtube.com/watch?v=Li13NrIyMYU
 
 * Force chain evolution during the compaction phase (displacements scaled):
 
