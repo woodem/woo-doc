@@ -1,4 +1,3 @@
-from __future__ import print_function
 import matplotlib
 matplotlib.rc('text',usetex=True)
 matplotlib.rc('text.latex',preamble=r'\usepackage{euler}')

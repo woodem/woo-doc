@@ -1,4 +1,3 @@
-from __future__ import print_function
 import woo, woo.dem, woo.system
 import prettytable
 ggg0=woo.system.childClasses(woo.dem.CGeomFunctor)

@@ -1,7 +1,3 @@
-from __future__ import print_function
-from builtins import str
-from builtins import map
-from builtins import range
 import sys
 from minieigen import *
 from math import *

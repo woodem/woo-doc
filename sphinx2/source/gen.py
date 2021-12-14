@@ -1,7 +1,3 @@
-# encoding: utf-8
-from __future__ import print_function
-from future import standard_library
-standard_library.install_aliases()
 import woo.document
 # import all modules here
 from woo import utils,log,timing,pack,document,manpage,plot,post2d,runtime,WeightedAverage2d

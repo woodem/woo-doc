@@ -1,5 +1,3 @@
-from __future__ import print_function
-from builtins import str
 import woo.utils, woo.pack, woo.batch
 from woo.dem import *
 from woo.core import *

@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 import re
 from docutils import nodes
 from docutils.parsers.rst import directives, Directive

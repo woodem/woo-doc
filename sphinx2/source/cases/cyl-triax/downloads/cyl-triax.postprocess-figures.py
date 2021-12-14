@@ -1,5 +1,3 @@
-# encoding: utf-8
-from __future__ import print_function
 from woo.pre.cylTriax import plotBatchResults
 sim='sim4d'
 db='%s.batch.hdf5'%sim
