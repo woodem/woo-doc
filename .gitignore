@@ -1,0 +1,4 @@
+sphinx2/build
+sphinx2/build-*
+sphinx2/source-extra
+__pycache__
