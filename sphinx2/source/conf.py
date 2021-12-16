@@ -164,6 +164,8 @@ mathjax_config={
         'packages':{'[+]':['boldsymbol']},
     }
 }
+# for mathjax 3.0 (default in sphinx 4.0?)
+mathjax3_config=mathjax_config
 
 # config for pngmath (in case we have to use that)
 pngmath_use_preview=True
