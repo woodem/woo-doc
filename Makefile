@@ -13,6 +13,7 @@ sphinxonly-ci:
 extras:
 	rm -rf sphinx2/build-extra sphinx2/source-extra
 	cd sphinx2/source; PYTHONPATH=. woo -x --fake-display -R gen.py --quirks=0 --only-extras
+	for ex in sphinx2/build-extra/*; do ssh woodem mkdir -p woo-private/`basename $$ex`/doc; rsync -r $$ex/html/ woodem:woo-private/`basename $$ex`/doc/; done
 upload:
 	rsync -r sphinx2/build/html/ woodem:woo-doc/
 	for ex in sphinx2/build-extra/*; do ssh woodem mkdir -p woo-private/`basename $$ex`/doc; rsync -r $$ex/html/ woodem:woo-private/`basename $$ex`/doc/; done

@@ -3,6 +3,7 @@ import woo.document
 from woo import utils,log,timing,pack,document,manpage,plot,post2d,runtime,WeightedAverage2d
 import minieigen,re,sys,sphinx,os,os.path
 import builtins
+import sphinx.cmd.build
 ##
 ## generated parts of the docs here
 ##
@@ -37,7 +38,6 @@ if not '--only-extras' in sys.argv:
             print('Calling sphinx.cmd.build.build_main with: '+str(args))
             builtins.woo_sphinx_fmt=fmt # this is used in conf.py
             # RemovedInSphinx20Warning: `sphinx.build_main()` has moved to `sphinx.cmd.build.build_main()`.
-            import sphinx.cmd.build
             sphinx.cmd.build.build_main(args)
             print('Sphinx finished for format %s.'%fmt)
 
@@ -81,7 +81,7 @@ copyright = u'{copyright} (distributor)'
 master_doc = u'index'
 templates_path=['../../source/_templates'] 
 html_static_path=['../../source/_static']
-intersphinx_mapping={{'woo':('https://www.woodem.org',None)}}
+intersphinx_mapping={{'woo':('https://woodem.org',None)}}
 extensions=[e for e in extensions if e!='sphinx.ext.viewcode'] # don't show code in extras, stragely wooExtra.* is included, not just the one particular extra module
 html_additional_pages = {{ }} # double here because of .format(...)
 modindex_common_prefix = [ '{mName}' ]
