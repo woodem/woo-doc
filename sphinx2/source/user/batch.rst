@@ -97,7 +97,7 @@ Enhanced table syntax
 
 For ease of use, there are some special syntax rules when reading the table:
 
-.. image:: fix/batch-xls-headings.png
+.. image:: fig/batch-xls-headings.png
 
 * one preprocessor value can span multiple columns, indicated with ``...`` (three dots) or ``…`` (unicode ellipsis character) in the column heading. In the example above, the gravity value spans 7 columns, which makes it easy to compute relevant values in excel. These columns will be concatenated and evaluated as Python expression.
 * empty cells (or cells containing ``=``, as shown in ``E3``) will assume the value of the first (valid, i.e. uncommented) cell above; it is an error to have empty cell (or ``=``) in the first valid line.
@@ -112,6 +112,7 @@ high     (0,0,-20)
 sideways (0,-10,0)
 low      (0,0,-5)
 diagonal (-5,-5,0)
+======== ============
 
 Special column names
 """""""""""""""""""""
