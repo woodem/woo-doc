@@ -17,8 +17,8 @@ for plastCondition in ['loglin']: #,'log+lin']:
     for n,omega in enumerate(pylab.arange(0,1+(1./nFig),1./nFig)):
         pylab.axvline(linewidth=2,color='k')
         law.yieldSurfType=plastCondition
-        pylab.plot(sigg,[(1 if i<len(sigg)/2 else -1)*law.yieldSigmaTNorm(sigmaN=s,omega=omega,coh0=3.5e6,tanPhi=.8) for i,s in enumerate(sigg)],label='$\hbox{%s,}\,\omega$=%g'%(plastCondition,omega),linewidth=2,alpha=.6)
-        pylab.xlabel('$\sigma_N$'); pylab.ylabel(r'$\pm|\sigma_T|$')
+        pylab.plot(sigg,[(1 if i<len(sigg)/2 else -1)*law.yieldSigmaTNorm(sigmaN=s,omega=omega,coh0=3.5e6,tanPhi=.8) for i,s in enumerate(sigg)],label=r'$\hbox{%s,}\,\omega$=%g'%(plastCondition,omega),linewidth=2,alpha=.6)
+        pylab.xlabel(r'$\sigma_N$'); pylab.ylabel(r'$\pm|\sigma_T|$')
     #pylab.show()
 pylab.legend()
 pylab.grid(True)
