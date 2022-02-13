@@ -139,10 +139,9 @@ bibtex_bibfiles=['references.bib']
 ## hack from https://bitbucket.org/birkenfeld/sphinx/issue/969/allow-mathjax-customization-via-localjs 
 # mathjax_path = 'MathJax_local.js' # file including MathJax from CDN plus local config, in _static
 mathjax_config={
-    # 'extensions':['autoload','[tex]/boldsymbol'],
     'loader':{'load':['[tex]/boldsymbol']},
-    'TeX': {
-        'Macros': {
+    'tex': {
+        'macros': {
             'prev': ["#1^-",1],
             'pprev':["#1^{\\ominus}",1],
             'curr':["#1^{\\circ}",1],
