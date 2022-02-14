@@ -136,9 +136,8 @@ extlinks={'woosrc':('https://github.com/woodem/woo/tree/master/%s','')}
 bibtex_bibfiles=['references.bib']
 
 ## customize mathjax
-## hack from https://bitbucket.org/birkenfeld/sphinx/issue/969/allow-mathjax-customization-via-localjs 
-# mathjax_path = 'MathJax_local.js' # file including MathJax from CDN plus local config, in _static
-mathjax_config={
+## this works for MathJax 3.x, which is the default since Sphinx 4.0
+mathjax_config3={
     'loader':{'load':['[tex]/boldsymbol']},
     'tex': {
         'macros': {
@@ -163,8 +162,6 @@ mathjax_config={
         'packages':{'[+]':['boldsymbol']},
     }
 }
-# for mathjax 3.0 (default in sphinx 4.0?)
-mathjax3_config=mathjax_config
 
 # config for pngmath (in case we have to use that)
 pngmath_use_preview=True
