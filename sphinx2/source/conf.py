@@ -137,7 +137,7 @@ bibtex_bibfiles=['references.bib']
 
 ## customize mathjax
 ## this works for MathJax 3.x, which is the default since Sphinx 4.0
-mathjax_config3={
+mathjax3_config={
     'loader':{'load':['[tex]/boldsymbol']},
     'tex': {
         'macros': {
